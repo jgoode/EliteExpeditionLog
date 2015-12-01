@@ -227,7 +227,6 @@
             this.ZLabel.Size = new System.Drawing.Size(14, 13);
             this.ZLabel.TabIndex = 5;
             this.ZLabel.Text = "Z";
-            this.ZLabel.Click += new System.EventHandler(this.label3_Click);
             // 
             // Refuel
             // 
@@ -326,8 +325,10 @@
             this.Controls.Add(this.ExpeditionLabel);
             this.Controls.Add(this.Expeditions);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Elite Expedition Log";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

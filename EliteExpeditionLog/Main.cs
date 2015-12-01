@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +14,11 @@ namespace EliteExpeditionLog {
     public partial class Main : Form {
         public Main() {
             InitializeComponent();
+            if (!File.Exists("eel.db")) {
+                InitializeDb();
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            InitializeDb();
-        }
 
         private void InitializeDb() {
             using (var db = new EelContext()) {
@@ -25,8 +26,5 @@ namespace EliteExpeditionLog {
             }
         }
 
-        private void label3_Click(object sender, EventArgs e) {
-
-        }
     }
 }
