@@ -26,30 +26,30 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.analysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Expeditions = new System.Windows.Forms.ComboBox();
             this.ExpeditionLabel = new System.Windows.Forms.Label();
             this.VisitedSystemsLabel = new System.Windows.Forms.Label();
             this.VisitedSystemsGrid = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.LogText = new System.Windows.Forms.RichTextBox();
-            this.SystemLabel = new System.Windows.Forms.Label();
-            this.XLabel = new System.Windows.Forms.Label();
-            this.XText = new System.Windows.Forms.TextBox();
-            this.YText = new System.Windows.Forms.TextBox();
-            this.YLabel = new System.Windows.Forms.Label();
+            this.ScannedObjectsLabel = new System.Windows.Forms.Label();
+            this.ObjectTypesLabel = new System.Windows.Forms.Label();
+            this.ScannedObjectsList = new System.Windows.Forms.ListBox();
+            this.ObjectTypesList = new System.Windows.Forms.ListBox();
+            this.Bookmark = new System.Windows.Forms.CheckBox();
+            this.Refuel = new System.Windows.Forms.CheckBox();
             this.ZText = new System.Windows.Forms.TextBox();
             this.ZLabel = new System.Windows.Forms.Label();
-            this.Refuel = new System.Windows.Forms.CheckBox();
-            this.Bookmark = new System.Windows.Forms.CheckBox();
-            this.ObjectTypesList = new System.Windows.Forms.ListBox();
-            this.ScannedObjectsList = new System.Windows.Forms.ListBox();
+            this.YText = new System.Windows.Forms.TextBox();
+            this.YLabel = new System.Windows.Forms.Label();
+            this.XText = new System.Windows.Forms.TextBox();
+            this.XLabel = new System.Windows.Forms.Label();
+            this.SystemLabel = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.ObjectTypesLabel = new System.Windows.Forms.Label();
-            this.ScannedObjectsLabel = new System.Windows.Forms.Label();
-            this.analysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LogText = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VisitedSystemsGrid)).BeginInit();
@@ -80,8 +80,20 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // analysisToolStripMenuItem
+            // 
+            this.analysisToolStripMenuItem.Name = "analysisToolStripMenuItem";
+            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.analysisToolStripMenuItem.Text = "Analysis";
+            // 
+            // mapsToolStripMenuItem
+            // 
+            this.mapsToolStripMenuItem.Name = "mapsToolStripMenuItem";
+            this.mapsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.mapsToolStripMenuItem.Text = "Maps";
             // 
             // Expeditions
             // 
@@ -126,7 +138,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(3, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(382, 227);
+            this.tabControl1.Size = new System.Drawing.Size(382, 269);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
@@ -147,70 +159,64 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(374, 201);
+            this.tabPage1.Size = new System.Drawing.Size(374, 243);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "System Info";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // ScannedObjectsLabel
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(374, 201);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Trilateration";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.ScannedObjectsLabel.AutoSize = true;
+            this.ScannedObjectsLabel.Location = new System.Drawing.Point(196, 51);
+            this.ScannedObjectsLabel.Name = "ScannedObjectsLabel";
+            this.ScannedObjectsLabel.Size = new System.Drawing.Size(89, 13);
+            this.ScannedObjectsLabel.TabIndex = 12;
+            this.ScannedObjectsLabel.Text = "Scanned Objects";
             // 
-            // LogText
+            // ObjectTypesLabel
             // 
-            this.LogText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LogText.Location = new System.Drawing.Point(9, 473);
-            this.LogText.Name = "LogText";
-            this.LogText.Size = new System.Drawing.Size(378, 66);
-            this.LogText.TabIndex = 6;
-            this.LogText.Text = "";
+            this.ObjectTypesLabel.AutoSize = true;
+            this.ObjectTypesLabel.Location = new System.Drawing.Point(10, 51);
+            this.ObjectTypesLabel.Name = "ObjectTypesLabel";
+            this.ObjectTypesLabel.Size = new System.Drawing.Size(70, 13);
+            this.ObjectTypesLabel.TabIndex = 11;
+            this.ObjectTypesLabel.Text = "Object Types";
             // 
-            // SystemLabel
+            // ScannedObjectsList
             // 
-            this.SystemLabel.AutoSize = true;
-            this.SystemLabel.Location = new System.Drawing.Point(7, 3);
-            this.SystemLabel.Name = "SystemLabel";
-            this.SystemLabel.Size = new System.Drawing.Size(41, 13);
-            this.SystemLabel.TabIndex = 0;
-            this.SystemLabel.Text = "System";
+            this.ScannedObjectsList.FormattingEnabled = true;
+            this.ScannedObjectsList.Location = new System.Drawing.Point(199, 69);
+            this.ScannedObjectsList.Name = "ScannedObjectsList";
+            this.ScannedObjectsList.Size = new System.Drawing.Size(169, 160);
+            this.ScannedObjectsList.TabIndex = 10;
             // 
-            // XLabel
+            // ObjectTypesList
             // 
-            this.XLabel.AutoSize = true;
-            this.XLabel.Location = new System.Drawing.Point(7, 27);
-            this.XLabel.Name = "XLabel";
-            this.XLabel.Size = new System.Drawing.Size(14, 13);
-            this.XLabel.TabIndex = 1;
-            this.XLabel.Text = "X";
+            this.ObjectTypesList.FormattingEnabled = true;
+            this.ObjectTypesList.Location = new System.Drawing.Point(10, 69);
+            this.ObjectTypesList.Name = "ObjectTypesList";
+            this.ObjectTypesList.Size = new System.Drawing.Size(163, 160);
+            this.ObjectTypesList.TabIndex = 9;
             // 
-            // XText
+            // Bookmark
             // 
-            this.XText.Location = new System.Drawing.Point(21, 24);
-            this.XText.Name = "XText";
-            this.XText.Size = new System.Drawing.Size(45, 20);
-            this.XText.TabIndex = 2;
+            this.Bookmark.AutoSize = true;
+            this.Bookmark.Location = new System.Drawing.Point(274, 26);
+            this.Bookmark.Name = "Bookmark";
+            this.Bookmark.Size = new System.Drawing.Size(74, 17);
+            this.Bookmark.TabIndex = 8;
+            this.Bookmark.Text = "Bookmark";
+            this.Bookmark.UseVisualStyleBackColor = true;
             // 
-            // YText
+            // Refuel
             // 
-            this.YText.Location = new System.Drawing.Point(83, 24);
-            this.YText.Name = "YText";
-            this.YText.Size = new System.Drawing.Size(45, 20);
-            this.YText.TabIndex = 4;
-            // 
-            // YLabel
-            // 
-            this.YLabel.AutoSize = true;
-            this.YLabel.Location = new System.Drawing.Point(69, 27);
-            this.YLabel.Name = "YLabel";
-            this.YLabel.Size = new System.Drawing.Size(14, 13);
-            this.YLabel.TabIndex = 3;
-            this.YLabel.Text = "Y";
+            this.Refuel.AutoSize = true;
+            this.Refuel.Location = new System.Drawing.Point(210, 26);
+            this.Refuel.Name = "Refuel";
+            this.Refuel.Size = new System.Drawing.Size(57, 17);
+            this.Refuel.TabIndex = 7;
+            this.Refuel.Text = "Refuel";
+            this.Refuel.UseVisualStyleBackColor = true;
             // 
             // ZText
             // 
@@ -228,41 +234,56 @@
             this.ZLabel.TabIndex = 5;
             this.ZLabel.Text = "Z";
             // 
-            // Refuel
+            // YText
             // 
-            this.Refuel.AutoSize = true;
-            this.Refuel.Location = new System.Drawing.Point(210, 26);
-            this.Refuel.Name = "Refuel";
-            this.Refuel.Size = new System.Drawing.Size(57, 17);
-            this.Refuel.TabIndex = 7;
-            this.Refuel.Text = "Refuel";
-            this.Refuel.UseVisualStyleBackColor = true;
+            this.YText.Location = new System.Drawing.Point(83, 24);
+            this.YText.Name = "YText";
+            this.YText.Size = new System.Drawing.Size(45, 20);
+            this.YText.TabIndex = 4;
             // 
-            // Bookmark
+            // YLabel
             // 
-            this.Bookmark.AutoSize = true;
-            this.Bookmark.Location = new System.Drawing.Point(274, 26);
-            this.Bookmark.Name = "Bookmark";
-            this.Bookmark.Size = new System.Drawing.Size(74, 17);
-            this.Bookmark.TabIndex = 8;
-            this.Bookmark.Text = "Bookmark";
-            this.Bookmark.UseVisualStyleBackColor = true;
+            this.YLabel.AutoSize = true;
+            this.YLabel.Location = new System.Drawing.Point(69, 27);
+            this.YLabel.Name = "YLabel";
+            this.YLabel.Size = new System.Drawing.Size(14, 13);
+            this.YLabel.TabIndex = 3;
+            this.YLabel.Text = "Y";
             // 
-            // ObjectTypesList
+            // XText
             // 
-            this.ObjectTypesList.FormattingEnabled = true;
-            this.ObjectTypesList.Location = new System.Drawing.Point(10, 69);
-            this.ObjectTypesList.Name = "ObjectTypesList";
-            this.ObjectTypesList.Size = new System.Drawing.Size(163, 121);
-            this.ObjectTypesList.TabIndex = 9;
+            this.XText.Location = new System.Drawing.Point(21, 24);
+            this.XText.Name = "XText";
+            this.XText.Size = new System.Drawing.Size(45, 20);
+            this.XText.TabIndex = 2;
             // 
-            // ScannedObjectsList
+            // XLabel
             // 
-            this.ScannedObjectsList.FormattingEnabled = true;
-            this.ScannedObjectsList.Location = new System.Drawing.Point(199, 69);
-            this.ScannedObjectsList.Name = "ScannedObjectsList";
-            this.ScannedObjectsList.Size = new System.Drawing.Size(169, 121);
-            this.ScannedObjectsList.TabIndex = 10;
+            this.XLabel.AutoSize = true;
+            this.XLabel.Location = new System.Drawing.Point(7, 27);
+            this.XLabel.Name = "XLabel";
+            this.XLabel.Size = new System.Drawing.Size(14, 13);
+            this.XLabel.TabIndex = 1;
+            this.XLabel.Text = "X";
+            // 
+            // SystemLabel
+            // 
+            this.SystemLabel.AutoSize = true;
+            this.SystemLabel.Location = new System.Drawing.Point(7, 3);
+            this.SystemLabel.Name = "SystemLabel";
+            this.SystemLabel.Size = new System.Drawing.Size(41, 13);
+            this.SystemLabel.TabIndex = 0;
+            this.SystemLabel.Text = "System";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(374, 201);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Trilateration";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -273,35 +294,14 @@
             this.tabPage3.Text = "More";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // ObjectTypesLabel
+            // LogText
             // 
-            this.ObjectTypesLabel.AutoSize = true;
-            this.ObjectTypesLabel.Location = new System.Drawing.Point(10, 51);
-            this.ObjectTypesLabel.Name = "ObjectTypesLabel";
-            this.ObjectTypesLabel.Size = new System.Drawing.Size(70, 13);
-            this.ObjectTypesLabel.TabIndex = 11;
-            this.ObjectTypesLabel.Text = "Object Types";
-            // 
-            // ScannedObjectsLabel
-            // 
-            this.ScannedObjectsLabel.AutoSize = true;
-            this.ScannedObjectsLabel.Location = new System.Drawing.Point(196, 51);
-            this.ScannedObjectsLabel.Name = "ScannedObjectsLabel";
-            this.ScannedObjectsLabel.Size = new System.Drawing.Size(89, 13);
-            this.ScannedObjectsLabel.TabIndex = 12;
-            this.ScannedObjectsLabel.Text = "Scanned Objects";
-            // 
-            // analysisToolStripMenuItem
-            // 
-            this.analysisToolStripMenuItem.Name = "analysisToolStripMenuItem";
-            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.analysisToolStripMenuItem.Text = "Analysis";
-            // 
-            // mapsToolStripMenuItem
-            // 
-            this.mapsToolStripMenuItem.Name = "mapsToolStripMenuItem";
-            this.mapsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.mapsToolStripMenuItem.Text = "Maps";
+            this.LogText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LogText.Location = new System.Drawing.Point(12, 515);
+            this.LogText.Name = "LogText";
+            this.LogText.Size = new System.Drawing.Size(378, 66);
+            this.LogText.TabIndex = 6;
+            this.LogText.Text = "";
             // 
             // button1
             // 
@@ -316,7 +316,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 551);
+            this.ClientSize = new System.Drawing.Size(396, 581);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.LogText);
             this.Controls.Add(this.tabControl1);

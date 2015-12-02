@@ -22,5 +22,7 @@ namespace EELData
         public double TotalDistance { get; set; }
         public bool Current { get; set; }
         public string User { get; set; }
+
+        public virtual ICollection<StarSystem> StarSystems { get; set; }
     }
 }
