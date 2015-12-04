@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EliteExpeditionLog", "EliteExpeditionLog\EliteExpeditionLog.csproj", "{12B5B522-BD53-4563-B5FE-110B5A0851ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EELData", "EELData\EELData.csproj", "{2783ADD6-3646-4F86-8D1B-9869180FCC97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EliteExpeditionLog.Tests", "EliteExpeditionLog.Tests\EliteExpeditionLog.Tests.csproj", "{AC77E067-4414-4AA8-AA8D-39CBD415B0D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EELServices", "EELServices\EELServices.csproj", "{BBE13EE8-57B1-4E39-AE45-CD6EC180EC8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{2783ADD6-3646-4F86-8D1B-9869180FCC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2783ADD6-3646-4F86-8D1B-9869180FCC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2783ADD6-3646-4F86-8D1B-9869180FCC97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC77E067-4414-4AA8-AA8D-39CBD415B0D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC77E067-4414-4AA8-AA8D-39CBD415B0D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC77E067-4414-4AA8-AA8D-39CBD415B0D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC77E067-4414-4AA8-AA8D-39CBD415B0D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE13EE8-57B1-4E39-AE45-CD6EC180EC8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE13EE8-57B1-4E39-AE45-CD6EC180EC8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE13EE8-57B1-4E39-AE45-CD6EC180EC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE13EE8-57B1-4E39-AE45-CD6EC180EC8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
