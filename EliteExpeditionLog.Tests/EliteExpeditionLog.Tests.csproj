@@ -65,6 +65,19 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EELData\EELData.csproj">
+      <Project>{2783add6-3646-4f86-8d1b-9869180fcc97}</Project>
+      <Name>EELData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EELServices\EELServices.csproj">
+      <Project>{bbe13ee8-57b1-4e39-ae45-cd6ec180ec8d}</Project>
+      <Name>EELServices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
