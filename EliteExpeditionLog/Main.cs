@@ -9,15 +9,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EELServices;
+using System.Diagnostics;
 
 namespace EliteExpeditionLog {
     public partial class Main : Form {
+        private string _dataPath;
+        private LogFileHandler _logFileHandler;
+        private static RichTextBox static_richTextBox;
+
         public Main() {
             InitializeComponent();
             if (!File.Exists("eel.db")) {
                 InitializeDb();
             }
             PopulateObjectTypes();
+            GetLogPath();
+            if (!string.IsNullOrWhiteSpace(_dataPath)) {
+                LogWatcher.Path = _dataPath;
+                LogWatcher.EnableRaisingEvents = true;
+            }
+            _logFileHandler = new LogFileHandler(new Expedition() { Id = 1 });
+            static_richTextBox = LogText;
+        }
+
+        private void GetLogPath() {
+            var productDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Frontier_Developments\\Products";
+            DirectoryInfo dirInfo = new DirectoryInfo(productDir);
+            FileInfo[] allFiles = dirInfo.GetFiles("netLog*.log", SearchOption.AllDirectories);
+            if (allFiles != null) {
+                var lastFile = allFiles[allFiles.Length - 1];
+                _dataPath = lastFile.DirectoryName;
+            }
         }
 
         /// <summary>
@@ -72,5 +95,48 @@ namespace EliteExpeditionLog {
             }
         }
 
+        static void LogRichText(string text) {
+            Main.LogRichText(text, Color.Black);
+        }
+
+        static void LogRichText(string text, Color color) {
+            try {
+
+                static_richTextBox.SelectionStart = static_richTextBox.TextLength;
+                static_richTextBox.SelectionLength = 0;
+
+                static_richTextBox.SelectionColor = color;
+                static_richTextBox.AppendText(text);
+                static_richTextBox.AppendText("\n");
+                static_richTextBox.SelectionColor = static_richTextBox.ForeColor;
+
+                static_richTextBox.SelectionStart = static_richTextBox.Text.Length;
+                static_richTextBox.SelectionLength = 0;
+                static_richTextBox.ScrollToCaret();
+                static_richTextBox.Refresh();
+            } catch (Exception ex) {
+                Trace.WriteLine("Exception SystemClass: " + ex.Message);
+                Trace.WriteLine("Trace: " + ex.StackTrace);
+            }
+        }
+
+
+        private void pathsToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void LogWatcher_Changed(object sender, FileSystemEventArgs e) {
+            if (e.ChangeType == WatcherChangeTypes.Changed) {
+                var system = _logFileHandler.RetrieveNextStarSystem(new FileInfo(e.FullPath));
+                if (null != system) {
+                    Main.LogRichText(string.Format("Visited System: {0}",system.Name), Color.Blue);
+                }
+                   
+            }
+        }
     }
 }

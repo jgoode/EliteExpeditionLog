@@ -25,9 +25,12 @@
         private void InitializeComponent() {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.analysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eDSMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.synchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Expeditions = new System.Windows.Forms.ComboBox();
             this.ExpeditionLabel = new System.Windows.Forms.Label();
             this.VisitedSystemsLabel = new System.Windows.Forms.Label();
@@ -51,10 +54,12 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.LogText = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.LogWatcher = new System.IO.FileSystemWatcher();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VisitedSystemsGrid)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LogWatcher)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -62,7 +67,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.analysisToolStripMenuItem,
-            this.mapsToolStripMenuItem});
+            this.mapsToolStripMenuItem,
+            this.eDSMToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(396, 24);
@@ -72,15 +78,23 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // analysisToolStripMenuItem
@@ -94,6 +108,20 @@
             this.mapsToolStripMenuItem.Name = "mapsToolStripMenuItem";
             this.mapsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.mapsToolStripMenuItem.Text = "Maps";
+            // 
+            // eDSMToolStripMenuItem
+            // 
+            this.eDSMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.synchToolStripMenuItem});
+            this.eDSMToolStripMenuItem.Name = "eDSMToolStripMenuItem";
+            this.eDSMToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.eDSMToolStripMenuItem.Text = "EDSM";
+            // 
+            // synchToolStripMenuItem
+            // 
+            this.synchToolStripMenuItem.Name = "synchToolStripMenuItem";
+            this.synchToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.synchToolStripMenuItem.Text = "Synch";
             // 
             // Expeditions
             // 
@@ -280,7 +308,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(374, 201);
+            this.tabPage2.Size = new System.Drawing.Size(374, 243);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Trilateration";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -289,7 +317,7 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(374, 201);
+            this.tabPage3.Size = new System.Drawing.Size(374, 243);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "More";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -311,6 +339,13 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "+";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // LogWatcher
+            // 
+            this.LogWatcher.Filter = "netLog*.log";
+            this.LogWatcher.NotifyFilter = System.IO.NotifyFilters.LastWrite;
+            this.LogWatcher.SynchronizingObject = this;
+            this.LogWatcher.Changed += new System.IO.FileSystemEventHandler(this.LogWatcher_Changed);
             // 
             // Main
             // 
@@ -336,6 +371,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LogWatcher)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -371,6 +407,10 @@
         private System.Windows.Forms.ToolStripMenuItem analysisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mapsToolStripMenuItem;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.IO.FileSystemWatcher LogWatcher;
+        private System.Windows.Forms.ToolStripMenuItem eDSMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem synchToolStripMenuItem;
     }
 }
 

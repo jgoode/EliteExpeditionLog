@@ -46,20 +46,20 @@ namespace EELServices
             Status = NetLogWatcherStatus.Initialized;
         }
 
-        private async void Watcher_Changed(object sender, FileSystemEventArgs e) {
+        private void Watcher_Changed(object sender, FileSystemEventArgs e) {
             if (e.ChangeType == System.IO.WatcherChangeTypes.Changed) {
-                await ParseFile(new FileInfo(e.FullPath));
+                 ParseFile(new FileInfo(e.FullPath));
             }
         }
 
-        private async Task<int> ParseFile(FileInfo fileInfo) {
+        private int ParseFile(FileInfo fileInfo) {
             if (fileInfo == null) throw new ArgumentNullException("fileInfo");
 
             int count = 0, nrsystems = VisitedSystems.Count;
             try {
                 using (Stream fs = new FileStream(fileInfo.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                     using (StreamReader sr = new StreamReader(fs)) {
-                        count = await ReadData(fileInfo, sr);
+                        count =  ReadData(fileInfo, sr);
                     }
                 }
             } catch (Exception ex) {
@@ -68,7 +68,7 @@ namespace EELServices
             return count;
         }
 
-        private async Task<int> ReadData(FileInfo fileInfo, StreamReader sr) {
+        private int ReadData(FileInfo fileInfo, StreamReader sr) {
             if (fileInfo == null) throw new ArgumentNullException("fileInfo");
             if (sr == null) throw new ArgumentNullException("sr");
 
@@ -105,7 +105,7 @@ namespace EELServices
                                 continue;
 
                         if (ps.Time.Subtract(gammastart).TotalMinutes > 0) { // Ta bara med efter gamma. 
-                            await AddNewSystem(ps);
+                             AddNewSystem(ps);
                             count++;
                         }
                     }
@@ -127,8 +127,12 @@ namespace EELServices
             return count;
         }
 
-        private async Task AddNewSystem(SystemPosition ps) {
-            throw new NotImplementedException();
+        private void AddNewSystem(SystemPosition ps) {
+            if (ps == null) throw new ArgumentNullException("ps");
+            var starSystem = new StarSystem { CreatedAt = DateTime.Now, Name = ps.Name };
+            NetLogWatcherEventArgs args = new NetLogWatcherEventArgs();
+            args.CurrentSystem = starSystem;
+            OnNewPosition(this, args);
         }
 
         public void Start() {

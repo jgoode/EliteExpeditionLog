@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogFileHandler.cs" />
+    <Compile Include="LogLineParser.cs" />
     <Compile Include="NetLogFileInfo.cs" />
     <Compile Include="NetLogWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

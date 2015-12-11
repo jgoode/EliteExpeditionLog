@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace EliteExpeditionLog.Tests
             var path = CreateFile(fileName);
             var pathToFile = string.Format(path + "\\{0}", fileName);
             watcher.Watcher.Path = path;
-            watcher.Start();
+           
 
             // C:\dev\EliteExpeditionLog\EliteExpeditionLog\testdata
             // 15-10-30-18:47 Eastern Summer Time  (22:47 GMT) - part 1
@@ -29,10 +30,17 @@ namespace EliteExpeditionLog.Tests
                 systems.Add(e.CurrentSystem);
             };
 
+            watcher.Start();
+
+
             WriteFile(pathToFile, "Some text");
             WriteFile(pathToFile, "{19:59:51} System:322(Floawns JM-W f1-322) Body:2 Pos:(9.94721e+009,6.32041e+009,-9.21425e+009) cruising");
-
+            Thread.Sleep(100);
             Assert.True(systems.Count > 0);
+
+        }
+
+        internal void NewPosition(object source, NetLogWatcherEventArgs args) {
 
         }
 
