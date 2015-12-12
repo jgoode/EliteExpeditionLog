@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace EELData {
     public class Settings {
-        string LogPath { get; set; }
-        string EdsmKey { get; set; }
+        public string LogPath { get; set; }
+        public string EdsmKey { get; set; }
+        public string Commander { get; set; }
     }
 }

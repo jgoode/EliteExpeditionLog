@@ -1,5 +1,5 @@
 ﻿namespace EliteExpeditionLog {
-    partial class Settings {
+    partial class SettingsForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -26,15 +26,17 @@
             this.ExitButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.FilePathLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LogFilePathText = new System.Windows.Forms.TextBox();
+            this.EdsmKeyText = new System.Windows.Forms.TextBox();
+            this.EdsmLabel = new System.Windows.Forms.Label();
             this.FileChooser = new System.Windows.Forms.OpenFileDialog();
+            this.CommanderNameText = new System.Windows.Forms.TextBox();
+            this.CommanderNameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ExitButton
             // 
-            this.ExitButton.Location = new System.Drawing.Point(16, 136);
+            this.ExitButton.Location = new System.Drawing.Point(16, 181);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(75, 23);
             this.ExitButton.TabIndex = 0;
@@ -43,7 +45,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(266, 136);
+            this.SaveButton.Location = new System.Drawing.Point(266, 181);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 1;
@@ -59,46 +61,64 @@
             this.FilePathLabel.TabIndex = 2;
             this.FilePathLabel.Text = "Log File Path";
             // 
-            // textBox1
+            // LogFilePathText
             // 
-            this.textBox1.Location = new System.Drawing.Point(16, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(325, 20);
-            this.textBox1.TabIndex = 3;
+            this.LogFilePathText.Location = new System.Drawing.Point(16, 30);
+            this.LogFilePathText.Name = "LogFilePathText";
+            this.LogFilePathText.Size = new System.Drawing.Size(302, 20);
+            this.LogFilePathText.TabIndex = 3;
             // 
-            // textBox2
+            // EdsmKeyText
             // 
-            this.textBox2.Location = new System.Drawing.Point(16, 82);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(325, 20);
-            this.textBox2.TabIndex = 5;
+            this.EdsmKeyText.Location = new System.Drawing.Point(16, 82);
+            this.EdsmKeyText.Name = "EdsmKeyText";
+            this.EdsmKeyText.Size = new System.Drawing.Size(325, 20);
+            this.EdsmKeyText.TabIndex = 5;
             // 
-            // label2
+            // EdsmLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "label2";
+            this.EdsmLabel.AutoSize = true;
+            this.EdsmLabel.Location = new System.Drawing.Point(13, 65);
+            this.EdsmLabel.Name = "EdsmLabel";
+            this.EdsmLabel.Size = new System.Drawing.Size(54, 13);
+            this.EdsmLabel.TabIndex = 4;
+            this.EdsmLabel.Text = "Edsm Key";
             // 
             // FileChooser
             // 
             this.FileChooser.FileName = "openFileDialog1";
             this.FileChooser.ValidateNames = false;
             // 
-            // Settings
+            // CommanderNameText
+            // 
+            this.CommanderNameText.Location = new System.Drawing.Point(16, 133);
+            this.CommanderNameText.Name = "CommanderNameText";
+            this.CommanderNameText.Size = new System.Drawing.Size(325, 20);
+            this.CommanderNameText.TabIndex = 7;
+            // 
+            // CommanderNameLabel
+            // 
+            this.CommanderNameLabel.AutoSize = true;
+            this.CommanderNameLabel.Location = new System.Drawing.Point(13, 116);
+            this.CommanderNameLabel.Name = "CommanderNameLabel";
+            this.CommanderNameLabel.Size = new System.Drawing.Size(94, 13);
+            this.CommanderNameLabel.TabIndex = 6;
+            this.CommanderNameLabel.Text = "Commander Name";
+            // 
+            // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 181);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(353, 216);
+            this.Controls.Add(this.CommanderNameText);
+            this.Controls.Add(this.CommanderNameLabel);
+            this.Controls.Add(this.EdsmKeyText);
+            this.Controls.Add(this.EdsmLabel);
+            this.Controls.Add(this.LogFilePathText);
             this.Controls.Add(this.FilePathLabel);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.ExitButton);
-            this.Name = "Settings";
+            this.Name = "SettingsForm";
             this.Text = "Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -110,9 +130,11 @@
         private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label FilePathLabel;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox LogFilePathText;
+        private System.Windows.Forms.TextBox EdsmKeyText;
+        private System.Windows.Forms.Label EdsmLabel;
         private System.Windows.Forms.OpenFileDialog FileChooser;
+        private System.Windows.Forms.TextBox CommanderNameText;
+        private System.Windows.Forms.Label CommanderNameLabel;
     }
 }

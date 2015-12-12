@@ -53,8 +53,9 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.LogText = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.AddExpedition = new System.Windows.Forms.Button();
             this.LogWatcher = new System.IO.FileSystemWatcher();
+            this.EditExpeditionButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VisitedSystemsGrid)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -128,7 +129,7 @@
             this.Expeditions.FormattingEnabled = true;
             this.Expeditions.Location = new System.Drawing.Point(9, 44);
             this.Expeditions.Name = "Expeditions";
-            this.Expeditions.Size = new System.Drawing.Size(347, 21);
+            this.Expeditions.Size = new System.Drawing.Size(329, 21);
             this.Expeditions.TabIndex = 1;
             // 
             // ExpeditionLabel
@@ -331,28 +332,41 @@
             this.LogText.TabIndex = 6;
             this.LogText.Text = "";
             // 
-            // button1
+            // AddExpedition
             // 
-            this.button1.Location = new System.Drawing.Point(362, 43);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(22, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = true;
+            this.AddExpedition.Location = new System.Drawing.Point(344, 43);
+            this.AddExpedition.Name = "AddExpedition";
+            this.AddExpedition.Size = new System.Drawing.Size(22, 23);
+            this.AddExpedition.TabIndex = 7;
+            this.AddExpedition.Text = "+";
+            this.AddExpedition.UseVisualStyleBackColor = true;
+            this.AddExpedition.Click += new System.EventHandler(this.AddExpedition_Click);
             // 
             // LogWatcher
             // 
+            this.LogWatcher.EnableRaisingEvents = true;
             this.LogWatcher.Filter = "netLog*.log";
             this.LogWatcher.NotifyFilter = System.IO.NotifyFilters.LastWrite;
             this.LogWatcher.SynchronizingObject = this;
             this.LogWatcher.Changed += new System.IO.FileSystemEventHandler(this.LogWatcher_Changed);
+            // 
+            // EditExpeditionButton
+            // 
+            this.EditExpeditionButton.Location = new System.Drawing.Point(368, 43);
+            this.EditExpeditionButton.Name = "EditExpeditionButton";
+            this.EditExpeditionButton.Size = new System.Drawing.Size(22, 23);
+            this.EditExpeditionButton.TabIndex = 8;
+            this.EditExpeditionButton.Text = "e";
+            this.EditExpeditionButton.UseVisualStyleBackColor = true;
+            this.EditExpeditionButton.Click += new System.EventHandler(this.EditExpeditionButton_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 581);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.EditExpeditionButton);
+            this.Controls.Add(this.AddExpedition);
             this.Controls.Add(this.LogText);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.VisitedSystemsGrid);
@@ -406,11 +420,12 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ToolStripMenuItem analysisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mapsToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button AddExpedition;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.IO.FileSystemWatcher LogWatcher;
         private System.Windows.Forms.ToolStripMenuItem eDSMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem synchToolStripMenuItem;
+        private System.Windows.Forms.Button EditExpeditionButton;
     }
 }
 

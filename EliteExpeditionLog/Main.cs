@@ -17,6 +17,10 @@ namespace EliteExpeditionLog {
         private string _dataPath;
         private LogFileHandler _logFileHandler;
         private static RichTextBox static_richTextBox;
+        private Settings _settings;
+        private static IEnumerable<Expedition> _expeditions;
+        private static Expedition _currentExpedition;
+        private static bool _userSelectsExpedition;
 
         public Main() {
             InitializeComponent();
@@ -29,8 +33,44 @@ namespace EliteExpeditionLog {
                 LogWatcher.Path = _dataPath;
                 LogWatcher.EnableRaisingEvents = true;
             }
-            _logFileHandler = new LogFileHandler(new Expedition() { Id = 1 });
+            RefreshExpeditionDropDown();
+           
+            _currentExpedition = new Expedition() { Id = 1 };
+            _logFileHandler = new LogFileHandler(_currentExpedition);
             static_richTextBox = LogText;
+
+            _settings = new Settings {
+                Commander = "The Mule"
+            };
+
+            // _settings = ExpeditionServices.GetSettings();
+
+        }
+
+        private void RefreshExpeditionDropDown() {
+            _userSelectsExpedition = false;
+            if (null == _expeditions) {
+                _expeditions = ExpeditionServices.GetAll();
+            }
+            Expeditions.DataSource = _expeditions.ToList();
+            Expeditions.DisplayMember = "Name";
+            var currentExpedition = _expeditions.Where(a => a.Current).FirstOrDefault();
+            int itemIndex = -1;
+            for (int index = 0; index < Expeditions.Items.Count; index++) {
+                var exp = (Expedition)Expeditions.Items[index];
+                if (exp.Id == currentExpedition.Id) {
+                    itemIndex = index;
+                    _currentExpedition = exp;
+                    break;
+                }
+            }
+            Expeditions.SelectedIndex = itemIndex;
+            PopulateSystemGrid();
+            _userSelectsExpedition = true;
+        }
+
+        private void PopulateSystemGrid() {
+            //get referencing star systems here
         }
 
         private void GetLogPath() {
@@ -91,7 +131,7 @@ namespace EliteExpeditionLog {
                 ObjectTypesList.DataSource = objectTypes;
                 ObjectTypesList.DisplayMember = "Name";
                 ObjectTypesList.ValueMember = "Id";
-                
+
             }
         }
 
@@ -120,7 +160,8 @@ namespace EliteExpeditionLog {
             }
         }
 
-
+        /* ********************** Form Events **************************/
+        #region StripMenuEvents
         private void pathsToolStripMenuItem_Click(object sender, EventArgs e) {
 
         }
@@ -128,15 +169,55 @@ namespace EliteExpeditionLog {
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
 
         }
+        #endregion
 
+        #region Log Watcher Events
         private void LogWatcher_Changed(object sender, FileSystemEventArgs e) {
             if (e.ChangeType == WatcherChangeTypes.Changed) {
                 var system = _logFileHandler.RetrieveNextStarSystem(new FileInfo(e.FullPath));
                 if (null != system) {
-                    Main.LogRichText(string.Format("Visited System: {0}",system.Name), Color.Blue);
+                    Main.LogRichText(string.Format("Visited System: {0}", system.Name), Color.Blue);
                 }
-                   
+
+            }
+        } 
+
+        #endregion
+
+        #region AddExpedition Button Events
+        private void AddExpedition_Click(object sender, EventArgs e) {
+            var addExpeditionForm = new AddExpedition(ExpeditionFormType.Add, _settings);
+            if (addExpeditionForm.ShowDialog() == DialogResult.OK) {
+                if (null == addExpeditionForm.Expedition) return;
+
+                var expedition = addExpeditionForm.Expedition;
+
+                var match = (from p in _expeditions
+                             where p.Name == expedition.Name
+                             select p).FirstOrDefault();
+
+                if (match != null) return;
+
+                List<Expedition> temp = new List<Expedition>();
+                foreach (var exp in _expeditions) {
+                    exp.Current = false;
+                    temp.Add(exp);
+                }
+
+                ExpeditionServices.ClearExpeditionCurrentFlags();
+                var expSaved = ExpeditionServices.InsertExpedition(expedition);
+                temp.Add(expSaved);
+                _expeditions = temp;
+                LogRichText(string.Format("Added expedition {0} ({1})...", expSaved.Name, expSaved.Id), Color.Red);
+                RefreshExpeditionDropDown();
             }
         }
+        #endregion
+
+        #region Edit Expedition Button Events
+        private void EditExpeditionButton_Click(object sender, EventArgs e) {
+
+        } 
+        #endregion
     }
 }
