@@ -1,0 +1,1197 @@
+<!DOCTYPE html><html class="APPLICATION_ENV_production">
+<head>
+    <title>The Mule / Profile / EDSM - Elite Dangerous Star Map</title>    <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/slate/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/global.css" rel="stylesheet" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+</head>
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <svg version="1.1" id="fixedLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                	 width="100%" height="100" viewBox="0 0 960 960" enable-background="new 0 0 960 960" xml:space="preserve">
+                    
+                    <path fill="#FFFFFF" d="M289.253,242.47c32.203,12.904,57.848,38.699,70.546,71.006c12.904-32.203,38.698-57.848,71.005-70.545
+                    	c-32.202-12.904-57.848-38.699-70.546-71.005C347.354,204.127,321.561,229.772,289.253,242.47z" class="star1" />
+                    <path fill="#FFFFFF" d="M463.75,365.491c29.247,11.72,52.538,35.147,64.071,64.488c11.719-29.247,35.145-52.538,64.486-64.07
+                    	c-29.246-11.72-52.537-35.147-64.068-64.488C516.518,330.668,493.092,353.959,463.75,365.491z" class="star2" />
+                    <path fill="#FFFFFF" d="M667.417,230.336c50.782,20.35,91.224,61.028,111.25,111.976c20.349-50.783,61.024-91.226,111.973-111.25
+                    	c-50.782-20.35-91.224-61.028-111.247-111.975C759.041,169.871,718.365,210.313,667.417,230.336z" class="star3" />
+                    <path fill="#FFFFFF" d="M793.417,615.483c30.308,12.145,54.443,36.423,66.396,66.829c12.144-30.309,36.42-54.445,66.826-66.396
+                    	c-30.308-12.145-54.443-36.422-66.395-66.828C848.1,579.396,823.823,603.532,793.417,615.483z" class="star4" />
+                    <path fill="#FFFFFF" d="M71.488,754.347c49.385,19.79,88.715,59.349,108.188,108.894c19.79-49.386,59.348-88.715,108.893-108.188
+                    	c-49.385-19.79-88.715-59.349-108.188-108.893C160.591,695.546,121.034,734.874,71.488,754.347z" class="star5" />
+                </svg>                    <span class="visible-xs-inline">EDSM</span>
+                    <span class="hidden-xs">EDSM - Elite Dangerous Star Map</span>
+                </a>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="header-navbar">
+                <ul class="nav navbar-nav">
+                                    </ul>
+                <ul class="nav navbar-nav navbar-right">
+                                                                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My account <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/settings">Settings</a></li>
+                                <li><a href="/settings/api">My API Key</a></li>
+                                <li><a href="/logs">Exploration Logs</a></li>
+                                <li><a href="/comments">Comments</a></li>
+                                <li><a href="/login/logout">Log out</a></li>
+                            </ul>
+                        </li>
+                                    </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+    
+            
+        
+    
+        <div class="container">
+        <div class="alert alert-danger" role="alert">
+            <strong>Your password seems to use the old encryption method which is not the most secure. Please update it in the <a href="/settings/password">Settings</a>.</strong>
+        </div>
+    </div>
+        
+    
+    
+        
+    
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 h2">
+                        <div class="pull-right">
+                <div class="btn-group" role="group">
+                    <a href="/user/profile/id/2084/cmdr/The+Mule" class="btn btn-default">Profile</a>
+                                        <a href="/user/flight-logs/id/2084/cmdr/The+Mule" class="btn btn-default">Flight Logs</a>
+                                                            <a href="/user/travel-map/id/2084/cmdr/The+Mule" class="btn btn-default active">Travel Map</a>
+                                    </div>
+            </div>
+                        The Mule's Profile
+        </div>
+    </div>
+</div>
+
+<div class="container"> 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Profile
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-5">Commander Name:</div>
+                                <div class="col-md-7"><strong>The Mule</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">Member since:</div>
+                                <div class="col-md-7"><strong>
+                                21/08/2015, 13:10:52                                </strong></div>
+                            </div>
+                            
+                            <div class="row"><div class="col-md-12">&nbsp;</div></div>
+                            
+                            <div class="row">
+                                <div class="col-md-5">Distances submitted:</div>
+                                <div class="col-md-7"><strong>1,264</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">Systems visited:</div>
+                                <div class="col-md-7"><strong>707</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">First discovered:</div>
+                                <div class="col-md-7"><strong>707</strong></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td width="25%">
+                                        <div data-hover="tooltip" title="Combat Rank: Competent"><svg version="1.1" id="rank_Combat" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                          x="0px" y="0px" width="100%" height="100px" 
+                          viewBox="0 0 835.871 639.89" enable-background="new 0 0 835.871 639.89" xml:space="preserve"><g>
+                    	<g>
+                    		<polygon fill="#953B09" points="562,543.388 665.82,461.388 590.132,461.388 499.021,543.388 		"/>
+                    		<polygon fill="#953B09" points="170.05,461.388 273.87,543.388 331.487,543.388 240.375,461.388 		"/>
+                    		<path fill="#953B09" d="M204.79,383.517c-0.002-0.043-0.005-0.086-0.007-0.129H71.29l75.97,60h75.524
+                    			c-2.37-2.9-4.794-6.102-7.15-9.57C211.91,428.652,206.799,417.74,204.79,383.517z"/>
+                    		<path fill="#953B09" d="M614.876,433.818c-2.357,3.469-4.781,6.67-7.15,9.57h80.885l75.971-60H625.726
+                    			c-0.002,0.043-0.004,0.086-0.006,0.129C623.71,417.74,618.599,428.652,614.876,433.818z"/>
+                    		<path fill="#953B09" d="M626.437,348.976c0.01,0.425,0.145,7.023-0.031,16.413h160.965l48.5-38.31L828,315.389H646.255
+                    			l-20.15,18.276L626.437,348.976z"/>
+                    		<path fill="#953B09" d="M204.073,348.976l0.331-15.311l-20.151-18.276H7.88L0,327.078l48.5,38.311h155.604
+                    			C203.928,356,204.063,349.4,204.073,348.976z"/>
+                    	</g>
+                    </g><path fill="#FD7022" d="M272.564,381.984L158.235,278.29c0,0-7.063-4.463-13.294-16.839c-5.815-11.709-8.862-83.31-8.862-83.31
+                    	l77.992,71.788v-25.702L100.627,116.988c0,0-20.305-15.575-25.702-32.792C69.71,67.55,71.38,0,71.38,0l271.2,242.839
+                    	c0,0-0.253,23.985,0,23.93c-50.431,43.916-41.655,71.788-41.655,71.788l33.679,1.772l36.338,37.223l44.313,227.773L246.862,453.773
+                    	c0,0-12.332-9.883-23.043-25.701c-11.127-15.201-9.749-78.88-9.749-78.88l58.494,51.404V381.984L272.564,381.984z M557.945,381.984
+                    	L672.273,278.29c0,0,7.063-4.463,13.295-16.839c5.814-11.709,8.861-83.31,8.861-83.31l-77.992,71.788v-25.702L729.88,116.988
+                    	c0,0,20.305-15.575,25.703-32.792C760.798,67.55,759.128,0,759.128,0L487.929,242.839c0,0,0.252,23.985,0,23.93
+                    	c50.432,43.916,41.654,71.788,41.654,71.788l-33.678,1.772l-36.338,37.223l-44.314,227.773l168.392-151.555
+                    	c0,0,12.332-9.883,23.043-25.701c11.127-15.201,9.748-78.879,9.748-78.879l-58.492,51.404V381.984L557.945,381.984z
+                    	 M415.254,373.123v135.6l-26.588-135.6H415.254L415.254,373.123z M415.254,373.123v135.6l26.587-135.6H415.254L415.254,373.123z
+                    	 M399.301,196.753l15.953,11.521v75.333l-29.247-24.816v-23.929l-7.977-7.09l11.521-107.239l7.09,34.565L399.301,196.753
+                    	L399.301,196.753z M431.207,196.753l-15.953,11.521v75.333l29.248-24.816v-23.929l7.977-7.09l-11.521-107.239l-7.09,34.565
+                    	L431.207,196.753L431.207,196.753z M415.254,303.106v55.835l-38.996-34.564h-55.835l16.839-15.066l34.564-8.863l0.886-15.953
+                    	l-26.588,0.886l19.498-15.953l8.863-2.659L415.254,303.106L415.254,303.106z M415.254,303.106v55.835l38.996-34.564h55.836
+                    	l-16.84-15.066l-34.564-8.863l-0.885-15.953l26.588,0.886l-19.498-15.953l-8.861-2.659L415.254,303.106L415.254,303.106z
+                    	 M415.254,615.96v23.93l-44.313-38.996v-22.156L415.254,615.96L415.254,615.96z M415.254,615.96v23.93l44.314-38.996v-22.156
+                    	L415.254,615.96L415.254,615.96z"/></svg></div>                                    </td>
+                                    <td width="25%">
+                                        <div data-hover="tooltip" title="Trader Rank: Peddler"><svg version="1.1" id="rank_Trader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                          x="0px" y="0px" width="100%" height="100px" 
+                          viewBox="0 0 701.667 632.116" enable-background="new 0 0 701.667 632.116" xml:space="preserve"><g>
+                    	<g>
+                    		<path fill="#4D4B4D" d="M32.478,205.83c-75.303,295.868,178.697,398.868,259.697,413.202v-12.834
+                    			C219.175,582.999-7.825,517.032,32.478,205.83z"/>
+                    		<polygon fill="#4D4B4D" points="229.737,599.698 185.167,621.534 232.417,632.116 268.862,613.297 		"/>
+                    		<polygon fill="#4D4B4D" points="170.7,568.118 124.417,579.448 165.546,597.928 204.61,588.817 		"/>
+                    		<polygon fill="#4D4B4D" points="112.729,524.896 73.517,524.896 111.591,554.013 148.093,553.882 		"/>
+                    		<polygon fill="#4D4B4D" points="66.616,467.526 29.334,459.827 59.796,495.081 94.536,502.077 		"/>
+                    		<polygon fill="#4D4B4D" points="35.072,404.946 5.114,387.071 20.884,426.747 50.104,444.032 		"/>
+                    		<polygon fill="#4D4B4D" points="21.847,340.184 0,319.711 5.958,355.868 27.292,375.711 		"/>
+                    		<polygon fill="#4D4B4D" points="21.243,270.331 0.777,246.125 2.426,281.756 20.796,303.366 		"/>
+                    	</g>
+                    	<g>
+                    		<path fill="#4D4B4D" d="M667.874,205.83c75.301,295.868-177.699,398.868-259.699,413.202v-12.834
+                    			C481.175,582.999,708.175,517.032,667.874,205.83z"/>
+                    		<polygon fill="#4D4B4D" points="471.929,599.698 516.499,621.534 469.249,632.116 432.804,613.297 		"/>
+                    		<polygon fill="#4D4B4D" points="530.968,568.118 577.249,579.448 536.12,597.928 497.058,588.817 		"/>
+                    		<polygon fill="#4D4B4D" points="588.937,524.896 628.149,524.896 590.075,554.013 553.573,553.882 		"/>
+                    		<polygon fill="#4D4B4D" points="635.052,467.526 672.333,459.827 641.872,495.081 607.132,502.077 		"/>
+                    		<polygon fill="#4D4B4D" points="666.595,404.946 696.552,387.071 680.782,426.747 651.563,444.032 		"/>
+                    		<polygon fill="#4D4B4D" points="679.819,340.184 701.667,319.711 695.71,355.868 674.374,375.711 		"/>
+                    		<polygon fill="#4D4B4D" points="680.425,270.331 700.89,246.125 699.241,281.756 680.872,303.366 		"/>
+                    	</g>
+                    </g>
+                    <g>
+                    	<g>
+                    		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M351.719,549.975l-43.451-218.961l-43.351-41.9l-19.892-1.303
+                    			c0,0-1.752-30.506,28.446-63.05L26.801,0c0,0-2.066,81.723,3.241,98.652c5.309,16.929,25.581,32.493,25.581,32.493
+                    			l130.464,123.409l-0.881,29.342l-86.057-81.09c0,0,4.772,84.127,10.798,96.168c6.026,12.041,13.146,16.775,13.146,16.775
+                    			l62.994,57.945v25.547l165.586,150.959l-0.02,0.1l0.065-0.059l0.065,0.059l-0.021-0.1l165.585-150.959v-25.547l62.996-57.945
+                    			c0,0,7.119-4.734,13.145-16.775s10.797-96.168,10.797-96.168l-86.055,81.09l-0.883-29.342l130.465-123.409
+                    			c0,0,20.273-15.564,25.582-32.493C678.702,81.723,676.636,0,676.636,0l-246.67,224.761c30.197,32.544,28.445,63.05,28.445,63.05
+                    			l-19.891,1.303l-43.352,41.9L351.719,549.975L351.719,549.975z M352.669,221.346v0.125l-0.07-0.063l-0.07,0.063v-0.125
+                    			l-33.253-29.114v-26.507l-10.175-9.079l6.039-77.72l19.451,42.418l18.008,13.364l18.008-13.364l19.451-42.418l6.039,77.72
+                    			l-10.174,9.079v26.507L352.669,221.346L352.669,221.346L352.669,221.346z M352.669,245.736v62.925l-44.313-38.109l-2.659-66.471
+                    			L352.669,245.736L352.669,245.736z M352.669,244.85v62.926l44.314-38.111l2.658-66.47L352.669,244.85L352.669,244.85z
+                    			 M351.653,330.819v120.533L328.61,330.819H351.653L351.653,330.819z M351.653,330.819v120.533l23.043-120.533H351.653
+                    			L351.653,330.819z M351.653,330.819"/>
+                    	</g>
+                    </g></svg></div>                                    </td>
+                                    <td width="25%">
+                                        <div data-hover="tooltip" title="Explorer Rank: Ranger"><svg version="1.1" id="rank_Explorer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                          x="0px" y="0px" width="100%" height="100px" 
+                          viewBox="0 0 902.227 732.063" enable-background="new 0 0 902.227 732.063" xml:space="preserve"><g>
+                    	<path fill="#034942" d="M679.617,172.756l14.744-13.775C633.418,91.469,545.226,49.031,447.114,49.031
+                    		c-9.601,0-19.101,0.41-28.49,1.21c3.81-0.14,7.64-0.21,11.49-0.21C531.687,50.031,622.015,98.119,679.617,172.756z"/>
+                    	<path fill="#034942" d="M779.582,366.335c-4.715,4.701-11.452,11.412-19.54,19.463c-5.229,5.205-11.028,10.977-17.203,17.122
+                    		c-14.428,120.33-96.685,219.791-207.44,259.062c-6.645,6.642-13.395,13.388-20.002,19.99l-0.053,0.054l0.001,0.001l-7.48,7.475
+                    		c-8.421,8.415-16.429,16.416-23.46,23.44c166.354-18.541,295.71-159.608,295.71-330.91c0-5.313-0.138-10.593-0.384-15.844
+                    		C779.679,366.239,779.634,366.283,779.582,366.335z"/>
+                    	<path fill="#034942" d="M386.459,681.605L386.459,681.605l-0.047-0.049c-1.769-1.768-3.55-3.548-5.334-5.33
+                    		C230.4,652.671,115.124,522.319,115.124,365.031c0-2.088,0.023-4.169,0.063-6.248c-0.032-0.038-0.065-0.07-0.098-0.108l-0.05,0.047
+                    		c-0.034-0.036-0.065-0.075-0.1-0.111c-0.539,7.737-0.826,15.547-0.826,23.42c0,174.336,133.978,317.359,304.583,331.78
+                    		L386.459,681.605z"/>
+                    </g>
+                    <path fill="#08FADC" d="M651.607,397.788c8.059,9.24,12.833,17.407,14.457,25.523c2.223,11.117-1.711,21.504-11.926,31.256
+                    	c-7.925,7.533-55.341,50.23-129.758,116.957c-21.288,19.088-43.402,38.9-65.74,58.904c5.377,4.814,10.766,9.639,16.152,14.461
+                    	c10.768,9.639,20.766,18.586,29.738,26.613c1.33,1.189,2.597,2.322,3.797,3.396c37.773-37.746,80.313-80.273,80.157-80.211
+                    	c22.156-21.27,7.091-58.492,18.611-70.9c0.38-0.34,173.116-172.07,172.823-171.938c15.279-16.157,13.385-50.172,13.294-77.992
+                    	c0.091,0.194-27.475,24.815-27.475,24.815V285.38c0,0,64.724-65.108,64.698-65.584c17.675-16.462,14.166-31.617,14.181-80.651
+                    	c-0.015,0.406-62.926,59.38-62.926,59.38v-16.839c0,0,101.156-101.083,101.034-101.036c12.676-12.819,19.5-9.2,19.5-80.65
+                    	L748.902,140.918l-0.011-0.034l0,0c0.147,18.604-1.341,38.387-5.298,57.404c-5.383,25.871-14.811,46.909-29.199,61.365
+                    	c0.025,0.826,0.054,1.745,0.082,2.748c0.104,3.526,0.207,7.371,0.305,11.407c0.159,6.627,0.283,13.105,0.358,19.189
+                    	c0.056,4.339,0.083,8.385,0.083,12.083c0,15.686-0.494,21.198-3.461,28.698c-2.955,7.475-8.266,14.63-17.305,23.311
+                    	c-3.973,3.816-8.454,8.098-13.354,12.763c-0.279,0.266-0.279,0.266-0.561,0.531c-7.188,6.842-14.888,14.139-22.588,21.414
+                    	C655.691,393.936,653.563,395.944,651.607,397.788L651.607,397.788z M645.629,391.265c-18.576-20.794-20.17-47.943-4.794-62.525
+                    	c3.486-3.307,3.38-3.186,5.069-4.773c3.172-2.979,7.858-7.378,14.485-13.596c6.273-5.886,32.759-30.728,45.415-42.601
+                    	c0.055,2.017,0.107,4.106,0.159,6.25c0.158,6.596,0.281,13.041,0.357,19.087c0.054,4.304,0.082,8.313,0.082,11.971
+                    	c0,14.541-0.432,19.335-2.836,25.418c-2.425,6.13-7.005,12.301-15.2,20.173c-3.963,3.806-8.436,8.079-13.327,12.736
+                    	c-0.278,0.266-0.278,0.266-0.558,0.531c-7.18,6.833-14.872,14.122-22.565,21.391C649.676,387.446,647.568,389.437,645.629,391.265
+                    	L645.629,391.265z M442.7,630.43c-22.338-20.004-44.452-39.816-65.741-58.904C302.542,504.799,255.127,462.1,247.203,454.567
+                    	c-10.216-9.75-14.148-20.139-11.925-31.254c1.623-8.117,6.398-16.284,14.457-25.523l0,0c-1.955-1.845-4.083-3.854-6.348-5.992
+                    	c-7.7-7.275-15.401-14.571-22.589-21.414c-0.279-0.266-0.279-0.266-0.559-0.531c-4.901-4.666-9.382-8.947-13.355-12.763
+                    	c-9.04-8.681-14.35-15.836-17.305-23.311c-2.965-7.5-3.46-13.012-3.46-28.698c0-3.698,0.029-7.744,0.083-12.083
+                    	c0.076-6.084,0.2-12.562,0.359-19.189c0.096-4.036,0.2-7.881,0.304-11.407c0.029-1.003,0.057-1.922,0.083-2.748
+                    	c-14.389-14.456-23.816-35.494-29.2-61.365c-4.011-19.278-5.485-39.343-5.291-58.169l0,0L0,0c0,71.45,6.826,67.831,19.498,80.651
+                    	c-0.122-0.047,101.035,101.036,101.035,101.036v16.839c0,0-62.912-58.975-62.925-59.38c0.014,49.034-3.495,64.189,14.18,80.651
+                    	c-0.025,0.477,64.698,65.584,64.698,65.584v13.294c0,0-27.565-24.621-27.475-24.815c-0.09,27.82-1.986,61.835,13.294,77.992
+                    	c-0.293-0.132,172.443,171.598,172.824,171.938c11.521,12.408-3.545,49.631,18.612,70.902c-0.154-0.064,42.069,42.148,79.739,79.791
+                    	c1.061-0.949,2.171-1.941,3.328-2.979c8.974-8.029,18.972-16.977,29.738-26.613C431.936,640.067,437.323,635.245,442.7,630.43
+                    	L442.7,630.43L442.7,630.43z M450.515,637.706l0.6,3.07v91.285c0,0-22.956-22.928-50.102-50.051
+                    	c0.927-0.828,1.889-1.688,2.886-2.582c8.973-8.027,18.972-16.977,29.739-26.613C439.267,647.776,444.896,642.737,450.515,637.706
+                    	L450.515,637.706L450.515,637.706z M455.338,619.114l30.34-155.594l30.135-28.359h34.563l38.109-37.224
+                    	c0,0,13.47-16.201-32.792-62.04V302.22L738.05,131.849c0.769,20.464-0.436,42.974-4.867,64.272
+                    	c-5.199,24.991-14.314,44.79-27.87,57.532c0.681-0.639-43.812,41.095-52.197,48.962c-6.628,6.219-11.316,10.619-14.49,13.6
+                    	c-1.692,1.589-5.105,4.809-5.105,4.809c-20.459,19.401-17.83,54.363,6.011,79.307c19.152,20.109,21.688,32.779,7.274,46.537
+                    	c-7.795,7.41-55.34,50.225-130.018,117.186C497.051,581.749,476.346,600.299,455.338,619.114L455.338,619.114L455.338,619.114z
+                    	 M255.711,391.265c18.576-20.794,20.17-47.943,4.794-62.525c-3.486-3.307-3.38-3.186-5.07-4.773
+                    	c-3.172-2.979-7.859-7.378-14.486-13.596c-6.273-5.886-32.757-30.728-45.415-42.601c-0.054,2.017-0.107,4.106-0.159,6.25
+                    	c-0.158,6.596-0.282,13.041-0.357,19.087c-0.054,4.304-0.083,8.313-0.083,11.971c0,14.541,0.431,19.335,2.836,25.418
+                    	c2.423,6.13,7.003,12.301,15.2,20.173c3.963,3.806,8.435,8.079,13.327,12.736c0.279,0.266,0.279,0.266,0.558,0.531
+                    	c7.179,6.833,14.872,14.122,22.565,21.391C251.664,387.446,253.773,389.437,255.711,391.265L255.711,391.265L255.711,391.265z
+                    	 M163.321,131.049l183.212,171.17v33.678c-46.261,45.839-32.792,62.04-32.792,62.04l38.109,37.224h34.564l30.133,28.359
+                    	l30.528,156.555c-21.376-19.145-42.451-38.025-62.523-56.023c-74.677-66.959-122.222-109.773-130.017-117.186
+                    	c-14.412-13.756-11.879-26.427,7.275-46.535c23.841-24.943,26.469-59.906,6.011-79.308c0,0-3.415-3.219-5.107-4.809
+                    	c-3.173-2.98-7.862-7.381-14.49-13.6c-8.386-7.867-52.877-49.601-52.196-48.962c-13.556-12.742-22.672-32.542-27.872-57.532
+                    	C163.667,174.545,162.492,151.726,163.321,131.049L163.321,131.049L163.321,131.049z M451.581,638.381l-0.467,2.396v91.285
+                    	c0,0,22.721-22.693,49.682-49.635c-1.067-0.955-2.186-1.955-3.353-2.998c-8.975-8.029-18.974-16.977-29.74-26.615
+                    	C462.326,648,456.949,643.188,451.581,638.381L451.581,638.381L451.581,638.381z M450.229,405.915v43.426l-28.361-25.701H368.69
+                    	l14.181-12.407l35.451-6.204V392.62h-23.043l13.294-11.521l11.521-1.772L450.229,405.915L450.229,405.915z M450.229,405.915v43.426
+                    	l28.36-25.701h53.176l-14.18-12.407l-35.451-6.204V392.62h23.043l-13.294-11.521l-11.521-1.772L450.229,405.915L450.229,405.915z
+                    	 M451.114,459.977v107.238l-21.271-107.238H451.114L451.114,459.977z M451.114,459.977v107.238l21.271-107.238H451.114
+                    	L451.114,459.977z M438.706,323.49l11.522,8.863v58.494l-20.385-18.611v-19.498l-7.977-6.204l9.749-110.784l4.431,24.816
+                    	L438.706,323.49L438.706,323.49z M461.749,323.49l-11.521,8.863v58.494l20.384-18.611v-19.498l7.977-6.204L468.84,235.75
+                    	l-4.432,24.816L461.749,323.49L461.749,323.49z"/></svg></div>                                    </td>
+                                    <td width="25%">
+                                        <div data-hover="tooltip" title="CQC Rank: Helpless"><svg version="1.1" id="rank_CQC" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                          x="0px" y="0px" width="100%" height="100px" 
+                          viewBox="0 0 720.73908 740.75614" xml:space="preserve"><g
+                         inkscape:label="Layer 1"
+                         inkscape:groupmode="layer"
+                         id="layer1"
+                         transform="translate(134.65524,-610.55556)">
+                        <g
+                           id="g4337"
+                           transform="translate(-368.01176,550.57264)">
+                          <g
+                             transform="matrix(4.0041057,0,0,4.0041057,1517.2254,-471.67883)"
+                             id="g4325">
+                            <path
+                               inkscape:connector-curvature="0"
+                               id="path4327"
+                               d="m -230.63811,132.77915 -5,25 -25,5 25,5 5,25 5,-25 25,-5 -25,-5 z"
+                               style="fill:#8a050c;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1" />
+                            <path
+                               id="path4329"
+                               d="m -300.63811,277.77825 -4,16 -16,4 16,4 4,16 4,-16 16,-4 -16,-4 -4,-16 z"
+                               style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#8a050c;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+                               inkscape:connector-curvature="0" />
+                            <g
+                               style="fill:#8a050c;fill-opacity:1;stroke:none;stroke-linejoin:round"
+                               transform="matrix(-1,0,0,1,2609.3619,1375.417)"
+                               id="g4331">
+                              <path
+                                 inkscape:connector-curvature="0"
+                                 id="path4333"
+                                 d="m 2770,-1097.6387 -4,16 -16,4 16,4 4,16 4,-16 16,-4 -16,-4 -4,-16 z"
+                                 style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#8a050c;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+                            </g>
+                            <path
+                               inkscape:connector-curvature="0"
+                               id="path4335"
+                               d="m -239.95651,196.42285 -1.5097,19.4316 2.5429,2.2695 0,6.627 8.2872,7.2793 8.2832,-7.2793 0,-6.627 2.5429,-2.2695 -1.5097,-19.4316 -4.8633,10.6054 -4.4531,3.3418 -4.459,-3.3418 -4.8614,-10.6054 z m -2.3593,31.291 0.6621,16.6191 11.0176,9.5274 11.0117,-9.5274 0.664,-16.6191 -11.6757,10.1933 -11.6797,-10.1933 z m -19.1543,20.0625 -11.1953,30.0605 42.0293,38.4336 -11.0586,-56.293 -11.5821,-11.8691 -8.1933,-0.332 z m 30.834,68.4941 42.0253,-38.4336 -11.1972,-30.0605 -8.1914,0.332 -11.5821,11.8691 -11.0546,56.293 z m -5.9532,-56.8691 5.9532,30.1347 5.9492,-30.1347 -5.9492,0 -5.9532,0 z"
+                               style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ff0507;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+                          </g>
+                        </g>
+                      </g></svg></div>                                    </td>
+                                </tr>
+                            </table>     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container"> 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4" style="line-height: 30px;">
+                            Travel Map: <strong class="systemName"></strong>
+                        </div>
+                        <div class="col-md-4" style="line-height: 30px;">
+                            <span class="systemDateVisited"></span> UTC
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-default prevSystemFast">&lt;&lt;</button>
+                                <button type="button" class="btn btn-default prevSystem">&lt;</button>
+                                <div class="btn btn-default">
+                                    <span class="systemCurrent"></span> / <span class="systemsTotal"></span>
+                                </div>
+                                <button type="button" class="btn btn-default nextSystem">&gt;</button>
+                                <button type="button" class="btn btn-default nextSystemFast">&gt;&gt;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    <div id="mapContainer">
+                        <div id="glContainer">
+                        	<!-- 3D webgl canvas here -->
+                        </div>
+                        <div id="loader" style="position: absolute;width:100%;top:40%;background: transparent;">
+                        	<table width="100%" style="background: transparent;">
+                                <tr>
+                                    <td class="text-center">
+                                        <svg version="1.1" id="animatedLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                	 width="100%" height="100" viewBox="0 0 960 960" enable-background="new 0 0 960 960" xml:space="preserve">
+                    
+                    <path fill="#FFFFFF" d="M289.253,242.47c32.203,12.904,57.848,38.699,70.546,71.006c12.904-32.203,38.698-57.848,71.005-70.545
+                    	c-32.202-12.904-57.848-38.699-70.546-71.005C347.354,204.127,321.561,229.772,289.253,242.47z" class="star1" />
+                    <path fill="#FFFFFF" d="M463.75,365.491c29.247,11.72,52.538,35.147,64.071,64.488c11.719-29.247,35.145-52.538,64.486-64.07
+                    	c-29.246-11.72-52.537-35.147-64.068-64.488C516.518,330.668,493.092,353.959,463.75,365.491z" class="star2" />
+                    <path fill="#FFFFFF" d="M667.417,230.336c50.782,20.35,91.224,61.028,111.25,111.976c20.349-50.783,61.024-91.226,111.973-111.25
+                    	c-50.782-20.35-91.224-61.028-111.247-111.975C759.041,169.871,718.365,210.313,667.417,230.336z" class="star3" />
+                    <path fill="#FFFFFF" d="M793.417,615.483c30.308,12.145,54.443,36.423,66.396,66.829c12.144-30.309,36.42-54.445,66.826-66.396
+                    	c-30.308-12.145-54.443-36.422-66.395-66.828C848.1,579.396,823.823,603.532,793.417,615.483z" class="star4" />
+                    <path fill="#FFFFFF" d="M71.488,754.347c49.385,19.79,88.715,59.349,108.188,108.894c19.79-49.386,59.348-88.715,108.893-108.188
+                    	c-49.385-19.79-88.715-59.349-108.188-108.893C160.591,695.546,121.034,734.874,71.488,754.347z" class="star5" />
+                </svg>                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <p id="loadtext">Loading the galaxy, please wait&hellip;</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-hover="tooltip"]').tooltip({'container':'body'});
+});
+</script>
+
+
+
+<style type="text/css">
+#mapContainer {
+    position: relative;
+}
+#mapContainer:after {
+    padding-top: 56.25%; /* 16:9 ratio */
+    display: block;
+    content: '';
+}
+    #glContainer {
+        position: absolute;
+        height: 100%;
+    }
+</style>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
+<script type="text/javascript" src="/js/map/OrbitControls.js"></script>
+<script type="text/javascript" src="/js/map/tween.js"></script>
+
+<script type="text/javascript">
+// Globals
+var masterContainer = $('#mapContainer');
+var screenWhalf, 
+    screenHhalf,
+    screenWidth,
+    screenHeight;
+
+var renderer, controls, camera;
+    
+var shaderList = [
+    '/img/map/shaders/datastars', 
+    '/img/map/shaders/cubemapcustom'
+];
+
+var controllers = {
+	viewSize: 0.6,
+	datastarSize: 1.0,
+	sceneSize: 1000.0
+};
+
+$(document).ready(function(){
+    $('#loading').show();
+    start();
+});
+
+var start = function(){
+    loadShaders( shaderList, function(e){
+		shaderList = e;
+		postShadersLoaded();
+	});
+};
+
+var postShadersLoaded = function(){
+    loadSystemsData( "/user/json/id/2084/cmdr/The+Mule", function(loadedData){
+		systemsData   = loadedData;     
+
+        initScene();
+		animate();
+	});
+};
+
+var loadSystemsData = function(dataFile, callback){
+    setLoadMessage("Fetching log data");	
+	
+    $.getJSON(dataFile, function(data){
+        if( callback ){		
+			setLoadMessage("Parsing systems data");	
+			callback(data);			
+		}
+    });
+};
+
+var initScene = function(){
+	screenWidth        = masterContainer.width();
+	screenHeight       = masterContainer.height();
+    
+	screenWhalf        = screenWidth / 2;
+	screenHhalf        = screenHhalf / 2;
+    
+    scene              = new THREE.Scene();
+    rotating           = new THREE.Object3D();
+	galacticCentering  = new THREE.Object3D();
+	translating        = new THREE.Object3D();
+
+	scene.add( new THREE.AmbientLight( 0x505050 ) );
+
+	galacticCentering.add( translating );
+	rotating.add( galacticCentering );
+	scene.add(rotating);
+    
+	renderer = new THREE.WebGLRenderer({antialias: false, alpha: true});
+
+	var devicePixelRatio = 1;//window.devicePixelRatio || 1;
+
+	renderer.setSize( screenWidth * devicePixelRatio, screenHeight * devicePixelRatio );
+	renderer.domElement.style.width = screenWidth + 'px';
+	renderer.domElement.style.height = screenHeight + 'px';
+
+	renderer.autoClear = false;
+	renderer.sortObjects = false;
+	renderer.generateMipmaps = false;
+
+    maxAniso = renderer.getMaxAnisotropy();
+
+	document.getElementById('glContainer').appendChild( renderer.domElement );
+    
+    //masterContainer[0].addEventListener( 'windowResize', onDocumentResize, true );
+	$(window).resize(onDocumentResize);
+    
+    $('.nextSystem').click(function(){ targetSystem(false, false) });
+    $('.nextSystemFast').click(function(){ targetSystem(true, false) });
+    $('.prevSystem').click(function(){ targetSystem(false, true) });
+    $('.prevSystemFast').click(function(){ targetSystem(true, true) });
+    
+    camera = new THREE.PerspectiveCamera( 60, screenWidth * devicePixelRatio / screenHeight * devicePixelRatio, 1, 10000000 );
+	camera.position.z = 4000; // 2500
+    camera.position.y = 4000; // 2500
+    camera.position.x = -4000; // 2500
+    
+    controls = new THREE.OrbitControls( camera, document.getElementById('glContainer') );
+    
+    controls.rotateSpeed = 4.0;
+	controls.zoomSpeed = 1.5;
+    controls.minDistance = 10;
+    controls.maxDistance = 30000;
+    
+	scene.add( camera );
+
+    sceneSetup();
+    
+    setTimeout(function() {
+
+		var s = 'scale(1.0)';
+
+		$('#layout').css({
+			webkitTransform: s,
+			mozTransform: s,
+			msTransform: s,
+			oTransform: s,
+			transform: s
+		});
+
+		$('#loader')
+			.fadeOut(500);
+        $('#mapGui')
+			.fadeIn(500);
+	}, 1500);
+};
+
+var sceneSetup = function(){
+    pGalacticSystem = generateGalaxy();
+	translating.add( pGalacticSystem );
+    
+    spacePlane = createSpacePlane();	
+	translating.add( spacePlane );
+    
+    pSystems = createSystems();
+    translating.add( pSystems );
+    
+	initSkybox();
+}
+
+function animate() {
+    requestAnimationFrame( animate );
+    
+    TWEEN.update();
+	controls.update();
+    render();
+}
+
+var render = function(){
+	//renderer.clear();
+    renderer.render( scene, camera );
+}
+
+/**
+ *  GALAXY
+ */
+function generateGalaxy(){
+	setLoadMessage("Generating the galaxy");
+
+	//	make a top down image
+	var galacticTopMaterial = new THREE.MeshBasicMaterial({
+		map: THREE.ImageUtils.loadTexture('/img/map/galactictop.png'),
+		blending: THREE.AdditiveBlending,
+		depthTest: false,
+		depthWrite: false,
+		side: THREE.DoubleSide,
+		transparent: true,
+        opacity: 0.5
+	});
+
+	var pGalacticSystem = new THREE.Mesh( new THREE.PlaneGeometry(150000,150000, 30, 30), galacticTopMaterial );
+	pGalacticSystem.rotation.x = Math.PI/2;
+	pGalacticSystem.material.map.anisotropy = maxAniso;
+
+	//	position it as if the disc visible in the star data were the actual galactic disc
+	pGalacticSystem.position.x = 25.21875;
+	pGalacticSystem.position.y = -20.90625;
+	pGalacticSystem.position.z = -25899.96875;
+
+	pGalacticSystem.rotation.y = 0;
+	pGalacticSystem.rotation.z = 0;
+    
+	return pGalacticSystem;
+}
+
+/**
+ *  SKYBOX
+ */
+var skybox;
+var skyboxUniforms;
+
+var initSkybox = function(){
+	var r = "/img/map/skybox/";
+
+	var urls = [ r + "px.jpg", r + "nx.jpg",
+				 r + "py.jpg", r + "ny.jpg",
+				 r + "pz.jpg", r + "nz.jpg" ];
+
+	var textureCube = THREE.ImageUtils.loadTextureCube( urls, undefined, setLoadMessage("Loading interstellar bodies") );
+	textureCube.anisotropy = maxAniso;
+	var shader = THREE.ShaderLib[ "cube" ];
+	shader.uniforms[ "tCube" ].value = textureCube;
+	shader.uniforms[ "opacity" ] = { value: 0.4, type: "f" };
+	skyboxUniforms = shader.uniforms;
+	var skyboxMat = new THREE.ShaderMaterial( {
+		fragmentShader: shaderList.cubemapcustom.fragment,
+		vertexShader: shaderList.cubemapcustom.vertex,
+		uniforms: shader.uniforms,
+		side: THREE.BackSide,
+		depthWrite: false,
+		depthTest: false,
+	} );
+
+	
+    skybox = new THREE.Mesh( new THREE.BoxGeometry( 150000 * 4, 150000 * 4, 150000 * 4 ), skyboxMat );
+	scene.add( skybox );
+}
+
+/**
+ *  SPACE AXES
+ */
+var glowSpanTexture = THREE.ImageUtils.loadTexture('/img/map/glowspan.png');
+
+function createSpacePlane(){
+    var radius = 20000;
+    
+	var cylinderMaterial = new THREE.MeshBasicMaterial({
+		map: glowSpanTexture,
+		blending: THREE.AdditiveBlending,
+		transparent: true,
+		depthTest: false,
+		depthWrite: false,		
+		wireframe: true,
+		opacity: 0.1,
+	})
+    
+	var cylinderGeo = new THREE.CylinderGeometry( radius, 0, 0, (360/8) - 1, 100 );
+	var matrix = new THREE.Matrix4();
+	matrix.scale( new THREE.Vector3(1,0,1) );
+	cylinderGeo.applyMatrix( matrix );
+	var mesh = new THREE.Mesh( cylinderGeo, cylinderMaterial );
+	mesh.material.map.wrapS = THREE.RepeatWrapping;
+	mesh.material.map.wrapT = THREE.RepeatWrapping;
+	mesh.material.map.needsUpdate = true;
+	mesh.material.map.onUpdate = function(){
+		this.offset.y -= 0.001;
+		this.needsUpdate = true;
+	}
+    
+	translating.add( mesh );
+    
+    var lines = new THREE.Geometry();
+	lines.vertices.push( new THREE.Vector3(0,0,-radius) );
+	lines.vertices.push( new THREE.Vector3(0,0,radius) );
+	lines.vertices.push( new THREE.Vector3(-radius,0,0) );
+	lines.vertices.push( new THREE.Vector3(radius,0,0) );
+	lines.vertices.push( new THREE.Vector3(0, -radius / 8,0) );
+	lines.vertices.push( new THREE.Vector3(0, radius / 8,0) );
+	mesh = new THREE.Line( lines, new THREE.LineBasicMaterial(
+		{ 
+			color: 0xff6b0b, 
+			blending: THREE.AdditiveBlending,
+			transparent: true,
+			depthTest: false,
+			depthWrite: false,		
+			wireframe: true,
+			linewidth: 4,
+		}), THREE.LinePieces );
+	
+    translating.add( mesh );
+    
+    var cylinderGeo = new THREE.CylinderGeometry( radius, 0, 0, (360/8) - 1, 100 );
+	var matrix = new THREE.Matrix4();
+	matrix.scale( new THREE.Vector3(1,0,1) );
+	cylinderGeo.applyMatrix( matrix );
+	var mesh = new THREE.Mesh( cylinderGeo, cylinderMaterial );
+	mesh.material.map.wrapS = THREE.RepeatWrapping;
+	mesh.material.map.wrapT = THREE.RepeatWrapping;
+	mesh.material.map.needsUpdate = true;
+	mesh.material.map.onUpdate = function(){
+		this.offset.y -= 0.001;
+		this.needsUpdate = true;
+	}
+    
+    // Sagittarius A*
+    mesh.position.x = 25.21875;
+	mesh.position.y = -20.90625;
+	mesh.position.z = -25899.96875;
+    
+	translating.add( mesh );
+    
+	var lines = new THREE.Geometry();
+	lines.vertices.push( new THREE.Vector3(0,0,-radius) );
+	lines.vertices.push( new THREE.Vector3(0,0,radius) );
+	lines.vertices.push( new THREE.Vector3(-radius,0,0) );
+	lines.vertices.push( new THREE.Vector3(radius,0,0) );
+	lines.vertices.push( new THREE.Vector3(0, -radius / 8,0) );
+	lines.vertices.push( new THREE.Vector3(0, radius / 8,0) );
+	mesh = new THREE.Line( lines, new THREE.LineBasicMaterial(
+		{ 
+			color: 0xff6b0b, 
+			blending: THREE.AdditiveBlending,
+			transparent: true,
+			depthTest: false,
+			depthWrite: false,		
+			wireframe: true,
+			linewidth: 4,
+		}), THREE.LinePieces );
+    
+    // Sagittarius A*
+    mesh.position.x = 25.21875;
+	mesh.position.y = -20.90625;
+	mesh.position.z = -25899.96875;
+    
+	return mesh;
+}
+
+/**
+ *  SYSTEMS
+ */
+firstWithCoordsCreated = false;
+var spritey = null;
+
+var alreadyDrawn = [];
+ 
+var createSystems = function(){
+    var container = new THREE.Object3D();
+    var geometry  = new THREE.Geometry();
+    
+    var nbSystems = systemsData.length;
+    
+    $('.systemName').html(systemsData[0].name);
+    $('.systemDateVisited').html(systemsData[0].dateVisited);
+    $('.systemCurrent').html(1);
+    $('.systemsTotal').html(nbSystems);
+    
+    var galacticTexture0 = THREE.ImageUtils.loadTexture( "/img/map/galactic_sharp.png" );
+    var galacticTexture1 = THREE.ImageUtils.loadTexture( "/img/map/galactic_blur.png" );
+    //var datastarTexture0 = THREE.ImageUtils.loadTexture( "/img/map/p_0.png" );
+    //var datastarTexture1 = THREE.ImageUtils.loadTexture( "/img/map/p_2.png" );
+    
+    var datastarUniforms = {
+    	color:     { type: "c", value: new THREE.Color( 0xffffff /* 0xff6b0b */ ) },
+    	texture0:   { type: "t", value: galacticTexture0/*datastarTexture0*/ },
+    	texture1:   { type: "t", value: galacticTexture1/*datastarTexture1*/ },
+    	idealDepth: { type: "f", value: 1.0 },
+    	blurPower: { type: "f", value: 1.0 },
+    	blurDivisor: { type: "f", value: 2.0 },
+    	sceneSize: { type: "f", value: 120.0 },
+    	cameraDistance: { type: "f", value: 800.0 },
+    	zoomSize: 	{ type: "f", value: 1.0 },
+    	scale: { type: "f", value: 5.0 },
+    	brightnessScale: { type: "f", value: 0.2 }
+    };
+    
+    var datastarAttributes = {
+    	size: 			{ type: 'f', value: [] },
+    	customColor: 	{ type: 'c', value: [] },
+    	colorIndex: 	{ type: 'f', value: [] },
+    };
+    
+    var shaderMaterial = new THREE.ShaderMaterial( {
+		uniforms: 		datastarUniforms,
+		attributes:     datastarAttributes,
+		vertexShader:   shaderList.datastars.vertex,
+		fragmentShader: shaderList.datastars.fragment,
+
+		blending: 		THREE.AdditiveBlending,
+		depthTest: 		false,
+		depthWrite: 	false,
+		transparent:	true
+	});
+    
+    var lastSystemWithCoords = null;
+    var nbSystemsWithoutCoords = 0;
+    
+    $.each(systemsData, function(index, values){
+        setLoadMessage("Parsing systems data (" + (index+1) + "/" + nbSystems + ")");
+        
+        if(values.x != null)
+        {
+            if(nbSystemsWithoutCoords > 0 && lastSystemWithCoords != null)
+            {
+                var lines = new THREE.Geometry();
+            	lines.vertices.push( new THREE.Vector3(values.x / 32, values.y / 32, -values.z / 32) );
+            	lines.vertices.push( new THREE.Vector3(lastSystemWithCoords.x / 32, lastSystemWithCoords.y / 32, -lastSystemWithCoords.z / 32) );
+            	mesh = new THREE.Line( lines, new THREE.LineDashedMaterial(
+            		{ 
+            			color: 0xff0000, 
+            			blending: THREE.AdditiveBlending,
+            			transparent: true,
+            			depthTest: false,
+            			depthWrite: false,		
+            			wireframe: true,
+                        dashSize: 3, 
+                        gapSize: 1,
+            			linewidth: 4,
+            		}), THREE.LinePieces );
+                container.add(mesh);
+            }
+            
+            if(firstWithCoordsCreated == false)
+            {
+                firstWithCoordsCreated = true;
+                
+                spritey = makeTextSprite( values.name );
+            	spritey.position.set(values.x / 32, values.y / 32, -values.z / 32);
+            	translating.add( spritey );
+                
+                selectCursor(values.x / 32, values.y / 32, -values.z / 32);
+                
+                controls.target.set(
+                    values.x / 32,
+                    values.y / 32,
+                    -values.z / 32
+                );
+            }
+            
+            // Dont' draw twice the same system
+            if($.inArray(values.name, alreadyDrawn) == -1)
+            {
+                var p = new THREE.Vector3(0, 0, 0);
+                p.set(values.x / 32, values.y / 32, -values.z / 32);
+                
+                p.size = 1000;
+                
+                geometry.vertices.push( p );
+                
+                var r = 1, g = 1, b = 1;
+        		var c = new THREE.Color();
+        		c.r = r; c.g = g; c.b = b;
+        		geometry.colors.push( c );
+                
+                alreadyDrawn.push(values.name); 
+            }
+            
+            lastSystemWithCoords = values;
+            nbSystemsWithoutCoords = 0;
+        }
+        else
+        {
+            nbSystemsWithoutCoords++;
+        }
+        
+        if(systemsData[index-1] != undefined && systemsData[index-1].x != null && nbSystemsWithoutCoords == 0)
+        {
+            var lines = new THREE.Geometry();
+        	lines.vertices.push( new THREE.Vector3(values.x / 32, values.y / 32, -values.z / 32) );
+        	lines.vertices.push( new THREE.Vector3(systemsData[index-1].x / 32, systemsData[index-1].y / 32, -systemsData[index-1].z / 32) );
+        	mesh = new THREE.Line( lines, new THREE.LineBasicMaterial(
+        		{ 
+        			color: 0x00ff00, 
+        			blending: THREE.AdditiveBlending,
+        			transparent: true,
+        			depthTest: false,
+        			depthWrite: false,		
+        			wireframe: true,
+        			linewidth: 4,
+        		}), THREE.LinePieces );
+            container.add(mesh);
+        }
+    });
+    
+    var values_size = datastarAttributes.size.value;
+	var values_color = datastarAttributes.customColor.value;
+	var values_spectral = datastarAttributes.colorIndex.value;
+
+	for( var v = 0; v < geometry.vertices.length; v++ ) {
+	    values_size[ v ] = geometry.vertices[v].size;
+		values_color[ v ] = geometry.colors[v];
+	}
+
+	container.shaderMaterial = shaderMaterial;
+    
+	var pSystem = new THREE.PointCloud( geometry, shaderMaterial );
+	pSystem.dynamic = false;
+    
+    container.add( pSystem );
+            
+    return container;
+}
+
+
+
+/**
+ *  3D Cursor on select
+ */
+var selectCursorObject = null
+ 
+var selectCursor =  function(x, y, z)
+{
+
+    if(selectCursorObject == null)
+    {
+        selectCursorObject = new THREE.Object3D();
+        
+        //-- Ring around the system
+        var geometryL = new THREE.TorusGeometry( 12, 0.4, 3, 30 );
+        
+        var selection = new THREE.Mesh(geometryL, new THREE.MeshPhongMaterial({
+          color: 0x0DFFFF
+        }));
+        //selection.position.set(x, y, z);
+        selection.rotation.x = Math.PI / 2;
+        
+        selectCursorObject.add(selection);
+        
+        //-- Create a cone on the selection
+        var geometryCone = new THREE.CylinderGeometry(0, 5, 16, 4, 1, false);
+        var cone = new THREE.Mesh(geometryCone, new THREE.MeshPhongMaterial({
+          color: 0x0DFFFF
+        }));
+        cone.position.set(0, 20, 0);
+        cone.rotation.x = Math.PI;
+        selectCursorObject.add(cone);
+        
+        //-- Inner cone
+        var geometryConeInner = new THREE.CylinderGeometry(0, 3.6, 16, 4, 1, false);
+        var coneInner = new THREE.Mesh(geometryConeInner, new THREE.MeshBasicMaterial({
+          color: 0x010101
+        }));
+        coneInner.position.set(0, 20.2, 0);
+        coneInner.rotation.x = Math.PI;
+        selectCursorObject.add(coneInner);
+        
+        //translating.add(selectCursorObject);
+    }
+    
+    selectCursorObject.scale.set(1000, 1000, 1000);
+    selectCursorObject.position.set(x, y, z);
+    
+};
+
+
+/**
+ *  UTILS
+ */
+var $loadText = $('#loadtext');
+var setLoadMessage = function(msg){
+	$loadText.html(msg+"&hellip;");
+};
+            
+var loadShaders = function(list, callback){
+	var shaders = {};	
+
+	var expectedFiles = list.length * 2;
+	var loadedFiles = 0;
+
+	function makeCallback(name, type){
+		return function(data){
+			if( shaders[name] === undefined )
+				shaders[name] = {};
+			
+			shaders[name][type] = data;
+
+			loadedFiles++;
+			if( loadedFiles == expectedFiles )				
+				callback( shaders );
+		};
+	}
+	
+	for( var i=0; i<list.length; i++ )
+    {
+		var vertexShaderFile = list[i] + '.vsh';
+		var fragmentShaderFile = list[i] + '.fsh';	
+
+		var splitted      = list[i].split('/');
+		var shaderName    = splitted[splitted.length-1];
+		
+        $(document).load( vertexShaderFile, makeCallback(shaderName, 'vertex') );
+		$(document).load( fragmentShaderFile,  makeCallback(shaderName, 'fragment') );
+	}
+};
+
+function constrain(v, min, max){
+  if( v < min )
+    v = min;
+  else
+  if( v > max )
+    v = max;
+  return v;
+}
+
+function makeTextSprite( message, parameters )
+{
+	if ( parameters === undefined ) parameters = {};
+    
+    message  = ' ' + message + ' '
+	
+	var fontface = parameters.hasOwnProperty("fontface") ? 
+		parameters["fontface"] : "Arial";
+	
+	var fontsize = parameters.hasOwnProperty("fontsize") ? 
+		parameters["fontsize"] : 18;
+	
+	var borderThickness = parameters.hasOwnProperty("borderThickness") ? 
+		parameters["borderThickness"] : 2;
+	
+	var borderColor = parameters.hasOwnProperty("borderColor") ?
+		parameters["borderColor"] : { r:0, g:0, b:0, a:1.0 };
+	
+	var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?
+		parameters["backgroundColor"] : { r:255, g:255, b:255, a:1.0 };
+
+	//var spriteAlignment = THREE.SpriteAlignment.topLeft;
+		
+	var canvas = document.createElement('canvas');
+	var context = canvas.getContext('2d');
+	context.font = /*"Bold " + */fontsize + "px " + fontface;
+    
+	// get size data (height depends only on font size)
+	var metrics = context.measureText( message );
+	var textWidth = Math.ceil(metrics.width);
+    if(textWidth % 2 != 0) textWidth++; // Ensure texture with power of 2
+	
+	// background color
+	context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + ","
+								  + backgroundColor.b + "," + backgroundColor.a + ")";
+	// border color
+	context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + ","
+								  + borderColor.b + "," + borderColor.a + ")";
+
+	context.lineWidth = borderThickness;
+	roundRect(context, borderThickness/2, borderThickness/2, textWidth + borderThickness, fontsize * 1.4 + borderThickness, 6);
+	// 1.4 is extra height factor for text below baseline: g,j,p,q.
+	
+	// text color
+	context.fillStyle = "rgba(0, 0, 0, 1.0)";
+
+	context.fillText( message, borderThickness, fontsize + borderThickness);
+	
+	// canvas contents will be used for a texture
+	var texture = new THREE.Texture(canvas) 
+	texture.needsUpdate = true;
+
+	var spriteMaterial = new THREE.SpriteMaterial( 
+		{ map: texture, useScreenCoordinates: false/*, alignment: spriteAlignment*/ } );
+	var sprite = new THREE.Sprite( spriteMaterial );
+	sprite.scale.set(50,25,1.0);
+	return sprite;	
+}
+
+// function for drawing rounded rectangles
+function roundRect(ctx, x, y, w, h, r) 
+{
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.lineTo(x+w-r, y);
+    ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+    ctx.lineTo(x+w, y+h-r);
+    ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    ctx.lineTo(x+r, y+h);
+    ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+    ctx.lineTo(x, y+r);
+    ctx.quadraticCurveTo(x, y, x+r, y);
+    ctx.closePath();
+    ctx.fill();
+	ctx.stroke();   
+}
+
+function onDocumentResize(e){
+	screenWidth        = masterContainer.width();
+	screenHeight       = masterContainer.height();
+	screenWhalf        = screenWidth / 2;
+	screenHhalf        = screenHhalf / 2;
+
+	camera.aspect = screenWidth * devicePixelRatio / screenHeight * devicePixelRatio;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( screenWidth * devicePixelRatio, screenHeight * devicePixelRatio );
+}
+
+var targetTween = null;
+
+var targetSystem = function(fast, reverse){
+    var currentSystem = $('.systemCurrent').html();
+    
+    if(reverse == false && fast == false)
+        targetedSystem = parseInt(currentSystem) + 1;
+    
+    if(reverse == true && fast == false)
+        targetedSystem = parseInt(currentSystem) - 1;
+    
+    if(reverse == false && fast == true)
+        targetedSystem = parseInt(currentSystem) + 100;
+    
+    if(reverse == true && fast == true)
+        targetedSystem = parseInt(currentSystem) - 100;
+        
+    if(systemsData[targetedSystem-1] == undefined && reverse == false)
+        targetedSystem = systemsData.length;
+        
+    if(systemsData[targetedSystem-1] == undefined && reverse == true)
+        targetedSystem = 1;
+    
+    if(systemsData[targetedSystem-1] != undefined)
+    {
+        $('.systemName').html(systemsData[targetedSystem-1].name);
+        $('.systemDateVisited').html(systemsData[targetedSystem-1].dateVisited);
+        $('.systemCurrent').html(targetedSystem);
+        
+        if(systemsData[targetedSystem-1].x != null)
+        {
+            translating.remove(spritey);
+            spritey = makeTextSprite( systemsData[targetedSystem-1].name );
+            
+            var imageWidth = spritey.material.map.image.width / 2;
+			var imageHeight = spritey.material.map.image.height / 2;
+            
+           	spritey.position.set(
+                (systemsData[targetedSystem-1].x / 32), 
+                (systemsData[targetedSystem-1].y / 32), 
+                (-systemsData[targetedSystem-1].z / 32)
+            );
+            translating.add(spritey);
+            
+            selectCursor(systemsData[targetedSystem-1].x / 32, systemsData[targetedSystem-1].y / 32, -systemsData[targetedSystem-1].z / 32);
+            
+            if(targetTween != null)
+                targetTween.stop();
+            
+            targetTween = new TWEEN.Tween(controls.target).to({
+                x: (systemsData[targetedSystem-1].x / 32),
+                y: (systemsData[targetedSystem-1].y / 32),
+                z: (-systemsData[targetedSystem-1].z / 32)
+            }, 1000)
+                .onUpdate(function(){
+                    controls.target.set(
+                        this.x,
+                        this.y,
+                        this.z
+                    );
+                })
+                .start();
+        }
+    } 
+}
+</script>    
+    <footer class="navbar navbar-default">
+        <div class="container">
+            <p class="navbar-text">
+                EDSM &copy; 2015
+            </p>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/systems/pairs">System pairs</a></li>
+                    <li><a href="/top">Top 100</a></li>
+                    <li><a href="/api-logs">API Logs</a></li>
+                    <li><a href="/api">API</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/4.1.9/highcharts.js"></script>
+<script type="text/javascript" src="http://code.highcharts.com/4.1.9/modules/heatmap.js"></script>
+<script type="text/javascript" src="/js/highcharts-dark-unica.js"></script>    
+        <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-496332-22', 'auto');
+      ga('send', 'pageview');
+    </script>
+    </body>
+</html>
+</body>
+</html>

@@ -56,6 +56,9 @@
             this.AddExpedition = new System.Windows.Forms.Button();
             this.LogWatcher = new System.IO.FileSystemWatcher();
             this.EditExpeditionButton = new System.Windows.Forms.Button();
+            this.Discovered = new System.Windows.Forms.CheckBox();
+            this.DistToNextLabel = new System.Windows.Forms.Label();
+            this.DistToNextText = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VisitedSystemsGrid)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -72,7 +75,7 @@
             this.eDSMToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(396, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(590, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -152,10 +155,16 @@
             // 
             // VisitedSystemsGrid
             // 
+            this.VisitedSystemsGrid.AllowUserToDeleteRows = false;
+            this.VisitedSystemsGrid.AllowUserToResizeColumns = false;
+            this.VisitedSystemsGrid.AllowUserToResizeRows = false;
+            this.VisitedSystemsGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.VisitedSystemsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.VisitedSystemsGrid.Location = new System.Drawing.Point(9, 89);
             this.VisitedSystemsGrid.Name = "VisitedSystemsGrid";
-            this.VisitedSystemsGrid.Size = new System.Drawing.Size(378, 145);
+            this.VisitedSystemsGrid.RowHeadersVisible = false;
+            this.VisitedSystemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.VisitedSystemsGrid.Size = new System.Drawing.Size(569, 145);
             this.VisitedSystemsGrid.TabIndex = 4;
             // 
             // tabControl1
@@ -167,11 +176,14 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(3, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(382, 269);
+            this.tabControl1.Size = new System.Drawing.Size(573, 273);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.DistToNextText);
+            this.tabPage1.Controls.Add(this.DistToNextLabel);
+            this.tabPage1.Controls.Add(this.Discovered);
             this.tabPage1.Controls.Add(this.ScannedObjectsLabel);
             this.tabPage1.Controls.Add(this.ObjectTypesLabel);
             this.tabPage1.Controls.Add(this.ScannedObjectsList);
@@ -188,7 +200,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(374, 243);
+            this.tabPage1.Size = new System.Drawing.Size(565, 247);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "System Info";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -309,7 +321,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(374, 243);
+            this.tabPage2.Size = new System.Drawing.Size(499, 243);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Trilateration";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -326,9 +338,9 @@
             // LogText
             // 
             this.LogText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LogText.Location = new System.Drawing.Point(12, 515);
+            this.LogText.Location = new System.Drawing.Point(12, 520);
             this.LogText.Name = "LogText";
-            this.LogText.Size = new System.Drawing.Size(378, 66);
+            this.LogText.Size = new System.Drawing.Size(566, 109);
             this.LogText.TabIndex = 6;
             this.LogText.Text = "";
             // 
@@ -346,7 +358,8 @@
             // 
             this.LogWatcher.EnableRaisingEvents = true;
             this.LogWatcher.Filter = "netLog*.log";
-            this.LogWatcher.NotifyFilter = System.IO.NotifyFilters.LastWrite;
+            this.LogWatcher.IncludeSubdirectories = true;
+            this.LogWatcher.NotifyFilter = System.IO.NotifyFilters.Size;
             this.LogWatcher.SynchronizingObject = this;
             this.LogWatcher.Changed += new System.IO.FileSystemEventHandler(this.LogWatcher_Changed);
             // 
@@ -360,11 +373,37 @@
             this.EditExpeditionButton.UseVisualStyleBackColor = true;
             this.EditExpeditionButton.Click += new System.EventHandler(this.EditExpeditionButton_Click);
             // 
+            // Discovered
+            // 
+            this.Discovered.AutoSize = true;
+            this.Discovered.Location = new System.Drawing.Point(354, 27);
+            this.Discovered.Name = "Discovered";
+            this.Discovered.Size = new System.Drawing.Size(80, 17);
+            this.Discovered.TabIndex = 13;
+            this.Discovered.Text = "Discovered";
+            this.Discovered.UseVisualStyleBackColor = true;
+            // 
+            // DistToNextLabel
+            // 
+            this.DistToNextLabel.AutoSize = true;
+            this.DistToNextLabel.Location = new System.Drawing.Point(436, 5);
+            this.DistToNextLabel.Name = "DistToNextLabel";
+            this.DistToNextLabel.Size = new System.Drawing.Size(66, 13);
+            this.DistToNextLabel.TabIndex = 14;
+            this.DistToNextLabel.Text = "Dist To Next";
+            // 
+            // DistToNextText
+            // 
+            this.DistToNextText.Location = new System.Drawing.Point(439, 23);
+            this.DistToNextText.Name = "DistToNextText";
+            this.DistToNextText.Size = new System.Drawing.Size(64, 20);
+            this.DistToNextText.TabIndex = 15;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 581);
+            this.ClientSize = new System.Drawing.Size(590, 641);
             this.Controls.Add(this.EditExpeditionButton);
             this.Controls.Add(this.AddExpedition);
             this.Controls.Add(this.LogText);
@@ -426,6 +465,9 @@
         private System.Windows.Forms.ToolStripMenuItem eDSMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem synchToolStripMenuItem;
         private System.Windows.Forms.Button EditExpeditionButton;
+        private System.Windows.Forms.CheckBox Discovered;
+        private System.Windows.Forms.TextBox DistToNextText;
+        private System.Windows.Forms.Label DistToNextLabel;
     }
 }
 

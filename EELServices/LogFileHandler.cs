@@ -96,6 +96,7 @@ namespace EELServices {
                     Name = ps.Name,
                     UpdatedAt = now
                 });
+                VisitedSystems.Add(ps);
             }
         }
     }

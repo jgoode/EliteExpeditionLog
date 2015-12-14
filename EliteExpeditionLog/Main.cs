@@ -17,6 +17,7 @@ namespace EliteExpeditionLog {
         private string _dataPath;
         private LogFileHandler _logFileHandler;
         private static RichTextBox static_richTextBox;
+        private static DataGridView static_grid; 
         private Settings _settings;
         private static IEnumerable<Expedition> _expeditions;
         private static Expedition _currentExpedition;
@@ -24,27 +25,40 @@ namespace EliteExpeditionLog {
 
         public Main() {
             InitializeComponent();
+            //LogRichText("Initializing...", Color.DarkGreen);
+
             if (!File.Exists("eel.db")) {
                 InitializeDb();
             }
-            PopulateObjectTypes();
+            // _settings = ExpeditionServices.GetSettings();
+            _settings = new Settings {
+                Commander = "The Mule",
+                LogPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Frontier_Developments\\Products\\FORC-FDEV-D-1010\\Logs"
+            };
+
+            static_grid = VisitedSystemsGrid;
+
+            
             GetLogPath();
             if (!string.IsNullOrWhiteSpace(_dataPath)) {
                 LogWatcher.Path = _dataPath;
                 LogWatcher.EnableRaisingEvents = true;
             }
             RefreshExpeditionDropDown();
-           
-            _currentExpedition = new Expedition() { Id = 1 };
+            PopulateSystemGrid();
+            PopulateObjectTypes();
+
             _logFileHandler = new LogFileHandler(_currentExpedition);
             static_richTextBox = LogText;
 
-            _settings = new Settings {
-                Commander = "The Mule"
-            };
+        }
 
-            // _settings = ExpeditionServices.GetSettings();
-
+        private static void PopulateSystemGrid() {
+            static_grid.DataSource = StarSystemServices.GetLastNSystems();
+            static_grid.Columns[1].Width = 150;
+            static_grid.Columns[2].Width = 330;
+            static_grid.Columns[3].Width = 68;
+            static_grid.Columns[0].Visible = false;
         }
 
         private void RefreshExpeditionDropDown() {
@@ -69,12 +83,8 @@ namespace EliteExpeditionLog {
             _userSelectsExpedition = true;
         }
 
-        private void PopulateSystemGrid() {
-            //get referencing star systems here
-        }
-
         private void GetLogPath() {
-            var productDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Frontier_Developments\\Products";
+            var productDir = _settings.LogPath;
             DirectoryInfo dirInfo = new DirectoryInfo(productDir);
             FileInfo[] allFiles = dirInfo.GetFiles("netLog*.log", SearchOption.AllDirectories);
             if (allFiles != null) {
@@ -174,11 +184,28 @@ namespace EliteExpeditionLog {
         #region Log Watcher Events
         private void LogWatcher_Changed(object sender, FileSystemEventArgs e) {
             if (e.ChangeType == WatcherChangeTypes.Changed) {
-                var system = _logFileHandler.RetrieveNextStarSystem(new FileInfo(e.FullPath));
-                if (null != system) {
-                    Main.LogRichText(string.Format("Visited System: {0}", system.Name), Color.Blue);
-                }
 
+                try {
+                    LogWatcher.EnableRaisingEvents = false;
+                    var system = _logFileHandler.RetrieveNextStarSystem(new FileInfo(e.FullPath));
+                    if (null != system) {
+                        if (!string.IsNullOrWhiteSpace(DistToNextText.Text)) {
+                            double distToNext = 0;
+                            if (double.TryParse(DistToNextText.Text, out distToNext)) {
+                                system.DistToNext = distToNext;
+                                DistToNextText.Clear();
+                            }
+                        }
+                        var savedSystem = StarSystemServices.InsertStarSystem(system);
+                        if (null != savedSystem) {
+                            Main.LogRichText(string.Format("Arrival at System: {0}", savedSystem.Name), Color.Blue);
+                            //static_grid.Rows.Clear();
+                            PopulateSystemGrid();
+                        }
+                    }
+                } finally {
+                    LogWatcher.EnableRaisingEvents = true;
+                }
             }
         } 
 
