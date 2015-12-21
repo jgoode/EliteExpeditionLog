@@ -21,7 +21,10 @@ namespace EliteExpeditionLog {
         private Settings _settings;
         private static IEnumerable<Expedition> _expeditions;
         private static Expedition _currentExpedition;
+        //private static List<SystemObject> _systemObjects;
+        private static StarSystem _currentStarSystem;
         private static bool _userSelectsExpedition;
+        private BindingList<SystemObject> _systemObjects = new BindingList<SystemObject>();
 
         public Main() {
             InitializeComponent();
@@ -33,11 +36,10 @@ namespace EliteExpeditionLog {
             // _settings = ExpeditionServices.GetSettings();
             _settings = new Settings {
                 Commander = "The Mule",
-                LogPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Frontier_Developments\\Products\\FORC-FDEV-D-1010\\Logs"
+                LogPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Frontier_Developments\\Products\\elite-dangerous-64\\Logs"
             };
-
+            RefreshScannedObjectsList();
             static_grid = VisitedSystemsGrid;
-
             
             GetLogPath();
             if (!string.IsNullOrWhiteSpace(_dataPath)) {
@@ -54,11 +56,14 @@ namespace EliteExpeditionLog {
         }
 
         private static void PopulateSystemGrid() {
-            static_grid.DataSource = StarSystemServices.GetLastNSystems();
+            static_grid.DataSource = StarSystemServices.GetLastNSystems(_currentExpedition);
             static_grid.Columns[1].Width = 150;
             static_grid.Columns[2].Width = 330;
             static_grid.Columns[3].Width = 68;
             static_grid.Columns[0].Visible = false;
+            var row = (SystemGridRow)static_grid.Rows[0].DataBoundItem;
+            if (null == row) return;
+            _currentStarSystem = StarSystemServices.GetByStarSystemId(row.Id);
         }
 
         private void RefreshExpeditionDropDown() {
@@ -170,6 +175,26 @@ namespace EliteExpeditionLog {
             }
         }
 
+        private void AddStarSystemObject(ObjectType selectedObjectType) {
+            var newSystemObject = new SystemObject();
+            newSystemObject.Landing = false;
+            newSystemObject.StarSystem = _currentStarSystem;
+            newSystemObject.Name = selectedObjectType.Name;
+            newSystemObject.ObjectType = selectedObjectType;
+            newSystemObject = SystemObjectServices.InsertSystemObject(newSystemObject);
+            _systemObjects.Add(newSystemObject);
+            
+            
+        }
+
+        private void RefreshScannedObjectsList() {
+            //ScannedObjectsList.Items.Clear();
+            ScannedObjectsList.DataSource = _systemObjects;
+            ScannedObjectsList.DisplayMember = "Name";
+            ScannedObjectsList.ValueMember = "Id";
+            
+        }
+
         /* ********************** Form Events **************************/
         #region StripMenuEvents
         private void pathsToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -199,7 +224,8 @@ namespace EliteExpeditionLog {
                         var savedSystem = StarSystemServices.InsertStarSystem(system);
                         if (null != savedSystem) {
                             Main.LogRichText(string.Format("Arrival at System: {0}", savedSystem.Name), Color.Blue);
-                            //static_grid.Rows.Clear();
+                            _systemObjects = new BindingList<SystemObject>();
+                            SystemLabel.Text = savedSystem.Name;
                             PopulateSystemGrid();
                         }
                     }
@@ -244,6 +270,29 @@ namespace EliteExpeditionLog {
         #region Edit Expedition Button Events
         private void EditExpeditionButton_Click(object sender, EventArgs e) {
 
+        }
+        #endregion
+
+        #region Expeditions Dropdown Events
+        private void Expeditions_SelectedIndexChanged(object sender, EventArgs e) {
+            _currentExpedition = (Expedition)Expeditions.SelectedItem;
+            PopulateSystemGrid();
+        }
+        #endregion
+
+        #region ObjectTypesList Events
+        private void ObjectTypesList_DoubleClick(object sender, EventArgs e) {
+            var selectedObjectType = (ObjectType)ObjectTypesList.SelectedItem;
+            if (null == selectedObjectType) return;
+            AddStarSystemObject(selectedObjectType);
+        }
+        #endregion
+
+        #region Refuel Events
+        private void Refuel_Click(object sender, EventArgs e) {
+            _currentStarSystem.Refuel = Refuel.Checked;
+           // _currentStarSystem.Expedition = _currentExpedition;
+            _currentStarSystem = StarSystemServices.UpdateStarSystem(_currentStarSystem);
         } 
         #endregion
     }

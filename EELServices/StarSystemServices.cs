@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EELData;
+using System.Data.Entity;
 
 namespace EELServices {
     public class StarSystemServices {
@@ -16,10 +17,33 @@ namespace EELServices {
             return system;
         }
 
-        public static List<SystemGridRow> GetLastNSystems(int numberToReturn = 20) {
+        public static StarSystem UpdateStarSystem(StarSystem system) {
+            if (null == system) throw new ArgumentNullException("expedition");
+            using (var db = new EelContext()) {
+                system.UpdatedAt = DateTime.Now;
+                db.StarSystems.Attach(system);
+                db.Entry(system).State = Microsoft.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            return system;
+        }
+
+        public static StarSystem GetByStarSystemId(int id) {
+            StarSystem starSystem = null;
+            using (var db = new EelContext()) {
+                starSystem = (from p in db.StarSystems.Include("Expedition")
+                              where p.Id == id
+                              select p).SingleOrDefault();
+                
+            }
+            return starSystem;
+        }
+
+        public static List<SystemGridRow> GetLastNSystems(Expedition currentExpedition, int numberToReturn = 20) {
             List<StarSystem> starSystems = null;
             using (var db = new EelContext()) {
                 starSystems = (from p in db.StarSystems
+                               where p.Expedition.Id == currentExpedition.Id
                                orderby p.CreatedAt descending
                                select p).Take(numberToReturn).ToList();
             }

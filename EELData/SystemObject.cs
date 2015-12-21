@@ -5,7 +5,8 @@ namespace EELData {
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public bool Landing { get; set; }
-
+        public virtual StarSystem StarSystem { get; set; }
         public virtual ObjectType ObjectType { get; set; }
+        public string Name { get; set; }
     }
 }

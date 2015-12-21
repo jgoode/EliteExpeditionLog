@@ -37,6 +37,9 @@
             this.VisitedSystemsGrid = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.DistToNextText = new System.Windows.Forms.TextBox();
+            this.DistToNextLabel = new System.Windows.Forms.Label();
+            this.Discovered = new System.Windows.Forms.CheckBox();
             this.ScannedObjectsLabel = new System.Windows.Forms.Label();
             this.ObjectTypesLabel = new System.Windows.Forms.Label();
             this.ScannedObjectsList = new System.Windows.Forms.ListBox();
@@ -56,9 +59,6 @@
             this.AddExpedition = new System.Windows.Forms.Button();
             this.LogWatcher = new System.IO.FileSystemWatcher();
             this.EditExpeditionButton = new System.Windows.Forms.Button();
-            this.Discovered = new System.Windows.Forms.CheckBox();
-            this.DistToNextLabel = new System.Windows.Forms.Label();
-            this.DistToNextText = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VisitedSystemsGrid)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -129,11 +129,13 @@
             // 
             // Expeditions
             // 
+            this.Expeditions.CausesValidation = false;
             this.Expeditions.FormattingEnabled = true;
             this.Expeditions.Location = new System.Drawing.Point(9, 44);
             this.Expeditions.Name = "Expeditions";
             this.Expeditions.Size = new System.Drawing.Size(329, 21);
             this.Expeditions.TabIndex = 1;
+            this.Expeditions.SelectedIndexChanged += new System.EventHandler(this.Expeditions_SelectedIndexChanged);
             // 
             // ExpeditionLabel
             // 
@@ -205,6 +207,32 @@
             this.tabPage1.Text = "System Info";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // DistToNextText
+            // 
+            this.DistToNextText.Location = new System.Drawing.Point(439, 23);
+            this.DistToNextText.Name = "DistToNextText";
+            this.DistToNextText.Size = new System.Drawing.Size(64, 20);
+            this.DistToNextText.TabIndex = 15;
+            // 
+            // DistToNextLabel
+            // 
+            this.DistToNextLabel.AutoSize = true;
+            this.DistToNextLabel.Location = new System.Drawing.Point(436, 5);
+            this.DistToNextLabel.Name = "DistToNextLabel";
+            this.DistToNextLabel.Size = new System.Drawing.Size(66, 13);
+            this.DistToNextLabel.TabIndex = 14;
+            this.DistToNextLabel.Text = "Dist To Next";
+            // 
+            // Discovered
+            // 
+            this.Discovered.AutoSize = true;
+            this.Discovered.Location = new System.Drawing.Point(354, 27);
+            this.Discovered.Name = "Discovered";
+            this.Discovered.Size = new System.Drawing.Size(80, 17);
+            this.Discovered.TabIndex = 13;
+            this.Discovered.Text = "Discovered";
+            this.Discovered.UseVisualStyleBackColor = true;
+            // 
             // ScannedObjectsLabel
             // 
             this.ScannedObjectsLabel.AutoSize = true;
@@ -238,6 +266,7 @@
             this.ObjectTypesList.Name = "ObjectTypesList";
             this.ObjectTypesList.Size = new System.Drawing.Size(163, 160);
             this.ObjectTypesList.TabIndex = 9;
+            this.ObjectTypesList.DoubleClick += new System.EventHandler(this.ObjectTypesList_DoubleClick);
             // 
             // Bookmark
             // 
@@ -258,6 +287,7 @@
             this.Refuel.TabIndex = 7;
             this.Refuel.Text = "Refuel";
             this.Refuel.UseVisualStyleBackColor = true;
+            this.Refuel.Click += new System.EventHandler(this.Refuel_Click);
             // 
             // ZText
             // 
@@ -321,7 +351,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(499, 243);
+            this.tabPage2.Size = new System.Drawing.Size(565, 247);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Trilateration";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -330,7 +360,7 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(374, 243);
+            this.tabPage3.Size = new System.Drawing.Size(565, 247);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "More";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -362,6 +392,7 @@
             this.LogWatcher.NotifyFilter = System.IO.NotifyFilters.Size;
             this.LogWatcher.SynchronizingObject = this;
             this.LogWatcher.Changed += new System.IO.FileSystemEventHandler(this.LogWatcher_Changed);
+            this.LogWatcher.Created += new System.IO.FileSystemEventHandler(this.LogWatcher_Changed);
             // 
             // EditExpeditionButton
             // 
@@ -372,32 +403,6 @@
             this.EditExpeditionButton.Text = "e";
             this.EditExpeditionButton.UseVisualStyleBackColor = true;
             this.EditExpeditionButton.Click += new System.EventHandler(this.EditExpeditionButton_Click);
-            // 
-            // Discovered
-            // 
-            this.Discovered.AutoSize = true;
-            this.Discovered.Location = new System.Drawing.Point(354, 27);
-            this.Discovered.Name = "Discovered";
-            this.Discovered.Size = new System.Drawing.Size(80, 17);
-            this.Discovered.TabIndex = 13;
-            this.Discovered.Text = "Discovered";
-            this.Discovered.UseVisualStyleBackColor = true;
-            // 
-            // DistToNextLabel
-            // 
-            this.DistToNextLabel.AutoSize = true;
-            this.DistToNextLabel.Location = new System.Drawing.Point(436, 5);
-            this.DistToNextLabel.Name = "DistToNextLabel";
-            this.DistToNextLabel.Size = new System.Drawing.Size(66, 13);
-            this.DistToNextLabel.TabIndex = 14;
-            this.DistToNextLabel.Text = "Dist To Next";
-            // 
-            // DistToNextText
-            // 
-            this.DistToNextText.Location = new System.Drawing.Point(439, 23);
-            this.DistToNextText.Name = "DistToNextText";
-            this.DistToNextText.Size = new System.Drawing.Size(64, 20);
-            this.DistToNextText.TabIndex = 15;
             // 
             // Main
             // 
