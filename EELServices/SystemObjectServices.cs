@@ -15,5 +15,16 @@ namespace EELServices {
             }
             return systemObject;
         }
+
+        public static List<SystemObject> GetByStarSystemId(int starSystemId) {
+            List<SystemObject> systemObjects = null;
+            using (var db = new EelContext()) {
+                systemObjects = (from p in db.SystemObjects
+                                 where p.StarSystem.Id == starSystemId
+                                 select p
+                                 ).ToList();
+            }
+            return systemObjects;
+        }
     }
 }

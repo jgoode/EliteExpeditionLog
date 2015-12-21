@@ -18,11 +18,13 @@ namespace EELData {
         public double Z { get; set; }
         public double DistToNext { get; set; }
         public bool IsBookMarked { get; set; }
+        public bool Discovered { get; set; }
         public bool CoordinatesSubmitted { get; set; }
         public bool Refuel { get; set; }
-
-        public virtual Expedition Expedition { get; set; }
-        public virtual ICollection<SystemObject> SystemObjects { get; set; }
+        public int Visits { get; set; }
+        public int ExpeditionId { get; set; }
+        public Expedition Expedition { get; set; }
+        public ICollection<SystemObject> SystemObjects { get; set; }
 
     }
 }

@@ -14,18 +14,30 @@ using System.Diagnostics;
 
 namespace EliteExpeditionLog {
     public partial class Main : Form {
+        #region Fields
         private string _dataPath;
         private LogFileHandler _logFileHandler;
         private static RichTextBox static_richTextBox;
-        private static DataGridView static_grid; 
+        private static DataGridView static_grid;
         private Settings _settings;
         private static IEnumerable<Expedition> _expeditions;
         private static Expedition _currentExpedition;
         //private static List<SystemObject> _systemObjects;
         private static StarSystem _currentStarSystem;
         private static bool _userSelectsExpedition;
-        private BindingList<SystemObject> _systemObjects = new BindingList<SystemObject>();
+        private static BindingList<SystemObject> _systemObjects = new BindingList<SystemObject>();
+        private static TextBox _xtext;
+        private static TextBox _ytext;
+        private static TextBox _ztext;
+        private static Label _systemLabel;
+        private static CheckBox _refuel;
+        private static CheckBox _bookmark;
+        private static CheckBox _discovered;
+        private static TextBox _distToNext;
 
+        #endregion
+
+        #region Ctor
         public Main() {
             InitializeComponent();
             //LogRichText("Initializing...", Color.DarkGreen);
@@ -33,14 +45,15 @@ namespace EliteExpeditionLog {
             if (!File.Exists("eel.db")) {
                 InitializeDb();
             }
+            BindStaticControls();
             // _settings = ExpeditionServices.GetSettings();
             _settings = new Settings {
                 Commander = "The Mule",
                 LogPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Frontier_Developments\\Products\\elite-dangerous-64\\Logs"
             };
             RefreshScannedObjectsList();
-            static_grid = VisitedSystemsGrid;
             
+
             GetLogPath();
             if (!string.IsNullOrWhiteSpace(_dataPath)) {
                 LogWatcher.Path = _dataPath;
@@ -51,19 +64,52 @@ namespace EliteExpeditionLog {
             PopulateObjectTypes();
 
             _logFileHandler = new LogFileHandler(_currentExpedition);
-            static_richTextBox = LogText;
+            
 
         }
 
-        private static void PopulateSystemGrid() {
+        private void BindStaticControls() {
+            static_grid = VisitedSystemsGrid;
+            static_richTextBox = LogText;
+            _xtext = XText;
+            _ytext = YText;
+            _ztext = ZText;
+            _systemLabel = SystemLabel;
+            _refuel = Refuel;
+            _bookmark = Bookmark;
+            _discovered = Discovered;
+            _distToNext = DistToNextText;
+        }
+        #endregion
+
+        #region Methods
+        private  void PopulateSystemGrid() {
+            if (_currentExpedition == null) return;
+            var data = StarSystemServices.GetLastNSystems(_currentExpedition);
+
             static_grid.DataSource = StarSystemServices.GetLastNSystems(_currentExpedition);
             static_grid.Columns[1].Width = 150;
             static_grid.Columns[2].Width = 330;
             static_grid.Columns[3].Width = 68;
             static_grid.Columns[0].Visible = false;
-            var row = (SystemGridRow)static_grid.Rows[0].DataBoundItem;
-            if (null == row) return;
-            _currentStarSystem = StarSystemServices.GetByStarSystemId(row.Id);
+            SystemGridRow row = null;
+            if (data.Count < 1) return;
+            row = (SystemGridRow)static_grid.Rows[0].DataBoundItem;
+            //_currentStarSystem = StarSystemServices.GetByStarSystemId(row.Id);
+            //RefreshStarSystemControls();
+        }
+
+        private  void RefreshStarSystemControls() {
+            _xtext.Text = _currentStarSystem.X.ToString("###0.00");
+            _ytext.Text = _currentStarSystem.Y.ToString("###0.00");
+            _ztext.Text = _currentStarSystem.Z.ToString("###0.00");
+            _systemLabel.Text = _currentStarSystem.Name;
+            _refuel.Checked = _currentStarSystem.Refuel;
+            _discovered.Checked = _currentStarSystem.Discovered;
+            _bookmark.Checked = _currentStarSystem.IsBookMarked;
+            DistanceTravelled.Text = _currentStarSystem.DistToNext.ToString("###0.00");
+            _systemObjects = new BindingList<SystemObject>(SystemObjectServices.GetByStarSystemId(_currentStarSystem.Id));
+            RefreshScannedObjectsList();
         }
 
         private void RefreshExpeditionDropDown() {
@@ -183,8 +229,6 @@ namespace EliteExpeditionLog {
             newSystemObject.ObjectType = selectedObjectType;
             newSystemObject = SystemObjectServices.InsertSystemObject(newSystemObject);
             _systemObjects.Add(newSystemObject);
-            
-            
         }
 
         private void RefreshScannedObjectsList() {
@@ -192,8 +236,9 @@ namespace EliteExpeditionLog {
             ScannedObjectsList.DataSource = _systemObjects;
             ScannedObjectsList.DisplayMember = "Name";
             ScannedObjectsList.ValueMember = "Id";
-            
-        }
+
+        } 
+        #endregion
 
         /* ********************** Form Events **************************/
         #region StripMenuEvents
@@ -214,20 +259,29 @@ namespace EliteExpeditionLog {
                     LogWatcher.EnableRaisingEvents = false;
                     var system = _logFileHandler.RetrieveNextStarSystem(new FileInfo(e.FullPath));
                     if (null != system) {
-                        if (!string.IsNullOrWhiteSpace(DistToNextText.Text)) {
-                            double distToNext = 0;
-                            if (double.TryParse(DistToNextText.Text, out distToNext)) {
-                                system.DistToNext = distToNext;
-                                DistToNextText.Clear();
+
+                        if (!StarSystemServices.SystemPreviouslyVisited(system.Name)) {
+
+                            if (!string.IsNullOrWhiteSpace(DistToNextText.Text)) {
+                                double distToNext = 0;
+                                if (double.TryParse(DistToNextText.Text, out distToNext)) {
+                                    system.DistToNext = distToNext;
+                                    DistToNextText.Clear();
+                                }
                             }
+
+                            system.Visits = 1;
+                            var savedSystem = StarSystemServices.InsertStarSystem(system);
+                            if (null != savedSystem) {
+                                Main.LogRichText(string.Format("Arrival at System: {0}", savedSystem.Name), Color.Blue);
+                                _systemObjects = new BindingList<SystemObject>();
+                                SystemLabel.Text = savedSystem.Name;
+                                PopulateSystemGrid();
+                            }
+                        } else {
+                            Main.LogRichText(string.Format("Arrival at System: {0} - Previously Visited", system.Name), Color.Navy);
                         }
-                        var savedSystem = StarSystemServices.InsertStarSystem(system);
-                        if (null != savedSystem) {
-                            Main.LogRichText(string.Format("Arrival at System: {0}", savedSystem.Name), Color.Blue);
-                            _systemObjects = new BindingList<SystemObject>();
-                            SystemLabel.Text = savedSystem.Name;
-                            PopulateSystemGrid();
-                        }
+
                     }
                 } finally {
                     LogWatcher.EnableRaisingEvents = true;
@@ -293,7 +347,32 @@ namespace EliteExpeditionLog {
             _currentStarSystem.Refuel = Refuel.Checked;
            // _currentStarSystem.Expedition = _currentExpedition;
             _currentStarSystem = StarSystemServices.UpdateStarSystem(_currentStarSystem);
-        } 
+        }
         #endregion
+
+        #region Bookmark Events
+        private void Bookmark_Click(object sender, EventArgs e) {
+            _currentStarSystem.IsBookMarked = Bookmark.Checked;
+            _currentStarSystem = StarSystemServices.UpdateStarSystem(_currentStarSystem);
+        }
+        #endregion
+
+        #region Discovered Events
+        private void Discovered_Click(object sender, EventArgs e) {
+            _currentStarSystem.Discovered = Discovered.Checked;
+            _currentStarSystem = StarSystemServices.UpdateStarSystem(_currentStarSystem);
+        }
+        #endregion
+
+        private void VisitedSystemsGrid_SelectionChanged(object sender, EventArgs e) {
+           
+        }
+
+        private void VisitedSystemsGrid_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e) {
+            if (e.StateChanged != DataGridViewElementStates.Selected) return;
+            var row = (SystemGridRow)e.Row.DataBoundItem;
+            _currentStarSystem = StarSystemServices.GetByStarSystemId(row.Id);
+            RefreshStarSystemControls();
+        }
     }
 }

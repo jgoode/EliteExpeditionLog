@@ -28,13 +28,30 @@ namespace EELServices {
             return system;
         }
 
+        public static bool SystemPreviouslyVisited(string name) {
+            bool visited = false;
+            StarSystem system = null;
+            using (var db = new EelContext()) {
+                system = (from p in db.StarSystems
+                          where p.Name.Trim() == name.Trim()
+                          select p).FirstOrDefault();
+
+                if (null != system) {
+                    system.Visits += 1;
+                    UpdateStarSystem(system);
+                    visited = true;
+                }
+            }
+            return visited;
+        }
+
         public static StarSystem GetByStarSystemId(int id) {
             StarSystem starSystem = null;
             using (var db = new EelContext()) {
                 starSystem = (from p in db.StarSystems.Include("Expedition")
                               where p.Id == id
                               select p).SingleOrDefault();
-                
+
             }
             return starSystem;
         }
@@ -42,7 +59,7 @@ namespace EELServices {
         public static List<SystemGridRow> GetLastNSystems(Expedition currentExpedition, int numberToReturn = 20) {
             List<StarSystem> starSystems = null;
             using (var db = new EelContext()) {
-                starSystems = (from p in db.StarSystems
+                starSystems = (from p in db.StarSystems.Include("Expeditions")
                                where p.Expedition.Id == currentExpedition.Id
                                orderby p.CreatedAt descending
                                select p).Take(numberToReturn).ToList();
