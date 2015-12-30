@@ -58,9 +58,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsServices.cs" />
     <Compile Include="StarSystemServices.cs" />
-    <Compile Include="SystemClass.cs" />
     <Compile Include="SystemObjectServices.cs" />
     <Compile Include="SystemPosition.cs" />
+    <Compile Include="SystemServices.cs" />
+    <Compile Include="Trilateration\CalculationsService.cs" />
+    <Compile Include="Trilateration\ReferencesSector.cs" />
+    <Compile Include="Trilateration\ReferenceSystem.cs" />
+    <Compile Include="Trilateration\SuggestedReferences.cs" />
+    <Compile Include="Trilateration\Trilateration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EELData\EELData.csproj">

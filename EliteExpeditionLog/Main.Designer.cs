@@ -37,6 +37,9 @@
             this.VisitedSystemsGrid = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.DistanceTravelled = new System.Windows.Forms.Label();
+            this.DistanceTravelledLabel = new System.Windows.Forms.Label();
             this.DistToNextText = new System.Windows.Forms.TextBox();
             this.DistToNextLabel = new System.Windows.Forms.Label();
             this.Discovered = new System.Windows.Forms.CheckBox();
@@ -54,17 +57,30 @@
             this.XLabel = new System.Windows.Forms.Label();
             this.SystemLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SuggestedSystemsLabel = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.LogText = new System.Windows.Forms.RichTextBox();
             this.AddExpedition = new System.Windows.Forms.Button();
             this.LogWatcher = new System.IO.FileSystemWatcher();
             this.EditExpeditionButton = new System.Windows.Forms.Button();
-            this.DistanceTravelledLabel = new System.Windows.Forms.Label();
-            this.DistanceTravelled = new System.Windows.Forms.Label();
+            this.DistTravelledLabel = new System.Windows.Forms.Label();
+            this.TotalDistanceText = new System.Windows.Forms.TextBox();
+            this.LoadSystemsWorker = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VisitedSystemsGrid)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogWatcher)).BeginInit();
             this.SuspendLayout();
             // 
@@ -187,6 +203,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.DistanceTravelled);
             this.tabPage1.Controls.Add(this.DistanceTravelledLabel);
             this.tabPage1.Controls.Add(this.DistToNextText);
@@ -212,6 +229,34 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "System Info";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(379, 91);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(175, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Trilaterate";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // DistanceTravelled
+            // 
+            this.DistanceTravelled.AutoSize = true;
+            this.DistanceTravelled.Location = new System.Drawing.Point(534, 2);
+            this.DistanceTravelled.Name = "DistanceTravelled";
+            this.DistanceTravelled.Size = new System.Drawing.Size(28, 13);
+            this.DistanceTravelled.TabIndex = 17;
+            this.DistanceTravelled.Text = "0.00";
+            this.DistanceTravelled.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // DistanceTravelledLabel
+            // 
+            this.DistanceTravelledLabel.AutoSize = true;
+            this.DistanceTravelledLabel.Location = new System.Drawing.Point(418, 2);
+            this.DistanceTravelledLabel.Name = "DistanceTravelledLabel";
+            this.DistanceTravelledLabel.Size = new System.Drawing.Size(99, 13);
+            this.DistanceTravelledLabel.TabIndex = 16;
+            this.DistanceTravelledLabel.Text = "Distance Travelled:";
             // 
             // DistToNextText
             // 
@@ -356,6 +401,16 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.SuggestedSystemsLabel);
+            this.tabPage2.Controls.Add(this.listBox1);
+            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -363,6 +418,88 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Trilateration";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // SuggestedSystemsLabel
+            // 
+            this.SuggestedSystemsLabel.AutoSize = true;
+            this.SuggestedSystemsLabel.Location = new System.Drawing.Point(379, 43);
+            this.SuggestedSystemsLabel.Name = "SuggestedSystemsLabel";
+            this.SuggestedSystemsLabel.Size = new System.Drawing.Size(100, 13);
+            this.SuggestedSystemsLabel.TabIndex = 16;
+            this.SuggestedSystemsLabel.Text = "Suggested Systems";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(379, 62);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(171, 147);
+            this.listBox1.TabIndex = 15;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 36);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(350, 174);
+            this.dataGridView1.TabIndex = 14;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(505, 6);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(45, 20);
+            this.textBox1.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(491, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(14, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Z";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(441, 6);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(45, 20);
+            this.textBox2.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(427, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(14, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Y";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(379, 6);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(45, 20);
+            this.textBox3.TabIndex = 9;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(365, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(14, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "X";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "System";
             // 
             // tabPage3
             // 
@@ -412,30 +549,39 @@
             this.EditExpeditionButton.UseVisualStyleBackColor = true;
             this.EditExpeditionButton.Click += new System.EventHandler(this.EditExpeditionButton_Click);
             // 
-            // DistanceTravelledLabel
+            // DistTravelledLabel
             // 
-            this.DistanceTravelledLabel.AutoSize = true;
-            this.DistanceTravelledLabel.Location = new System.Drawing.Point(418, 2);
-            this.DistanceTravelledLabel.Name = "DistanceTravelledLabel";
-            this.DistanceTravelledLabel.Size = new System.Drawing.Size(99, 13);
-            this.DistanceTravelledLabel.TabIndex = 16;
-            this.DistanceTravelledLabel.Text = "Distance Travelled:";
+            this.DistTravelledLabel.AutoSize = true;
+            this.DistTravelledLabel.Location = new System.Drawing.Point(394, 47);
+            this.DistTravelledLabel.Name = "DistTravelledLabel";
+            this.DistTravelledLabel.Size = new System.Drawing.Size(95, 13);
+            this.DistTravelledLabel.TabIndex = 9;
+            this.DistTravelledLabel.Text = "Total Distance (ly):";
             // 
-            // DistanceTravelled
+            // TotalDistanceText
             // 
-            this.DistanceTravelled.AutoSize = true;
-            this.DistanceTravelled.Location = new System.Drawing.Point(534, 2);
-            this.DistanceTravelled.Name = "DistanceTravelled";
-            this.DistanceTravelled.Size = new System.Drawing.Size(28, 13);
-            this.DistanceTravelled.TabIndex = 17;
-            this.DistanceTravelled.Text = "0.00";
-            this.DistanceTravelled.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.TotalDistanceText.Location = new System.Drawing.Point(485, 44);
+            this.TotalDistanceText.Name = "TotalDistanceText";
+            this.TotalDistanceText.ReadOnly = true;
+            this.TotalDistanceText.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TotalDistanceText.Size = new System.Drawing.Size(97, 20);
+            this.TotalDistanceText.TabIndex = 10;
+            this.TotalDistanceText.TabStop = false;
+            this.TotalDistanceText.Text = "0.0";
+            // 
+            // LoadSystemsWorker
+            // 
+            this.LoadSystemsWorker.WorkerReportsProgress = true;
+            this.LoadSystemsWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.LoadSystemsWorker_DoWork);
+            this.LoadSystemsWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.LoadSystemsWorker_RunWorkerCompleted);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 641);
+            this.Controls.Add(this.TotalDistanceText);
+            this.Controls.Add(this.DistTravelledLabel);
             this.Controls.Add(this.EditExpeditionButton);
             this.Controls.Add(this.AddExpedition);
             this.Controls.Add(this.LogText);
@@ -456,6 +602,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogWatcher)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -502,6 +651,20 @@
         private System.Windows.Forms.Label DistToNextLabel;
         private System.Windows.Forms.Label DistanceTravelled;
         private System.Windows.Forms.Label DistanceTravelledLabel;
+        private System.Windows.Forms.TextBox TotalDistanceText;
+        private System.Windows.Forms.Label DistTravelledLabel;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label SuggestedSystemsLabel;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.ComponentModel.BackgroundWorker LoadSystemsWorker;
     }
 }
 

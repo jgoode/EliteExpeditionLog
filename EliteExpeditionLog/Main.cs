@@ -34,6 +34,7 @@ namespace EliteExpeditionLog {
         private static CheckBox _bookmark;
         private static CheckBox _discovered;
         private static TextBox _distToNext;
+        public static List<EELData.System> Systems;  // Make available Application wide
 
         #endregion
 
@@ -46,14 +47,15 @@ namespace EliteExpeditionLog {
                 InitializeDb();
             }
             BindStaticControls();
-            // _settings = ExpeditionServices.GetSettings();
-            _settings = new Settings {
-                Commander = "The Mule",
-                LogPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Frontier_Developments\\Products\\elite-dangerous-64\\Logs"
-            };
             RefreshScannedObjectsList();
-            
-
+            GetSettings();
+            if (_settings == null) {
+                _settings = new Settings {
+                    Commander = "The Mule",
+                    LogPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Frontier_Developments\\Products\\elite-dangerous-64\\Logs"
+                };
+            }
+            RefreshSettings();
             GetLogPath();
             if (!string.IsNullOrWhiteSpace(_dataPath)) {
                 LogWatcher.Path = _dataPath;
@@ -62,10 +64,31 @@ namespace EliteExpeditionLog {
             RefreshExpeditionDropDown();
             PopulateSystemGrid();
             PopulateObjectTypes();
-
+            GetDistanceTravelled();
             _logFileHandler = new LogFileHandler(_currentExpedition);
-            
+            LoadSystems();
 
+        }
+        
+        #endregion
+
+        #region Methods
+
+        private void LoadSystems() {
+            LogRichText("Start loading Systems...", Color.Red);
+            LoadSystemsWorker.RunWorkerAsync();
+        }
+
+        private void GetDistanceTravelled() {
+            var total = StarSystemServices.GetTotalDistance(_currentExpedition);
+            TotalDistanceText.Text = total.ToString("###0.00");
+        }
+        private void RefreshSettings() {
+            this.Text = string.Format("Elite Expedition Log [{0}] - Commander: {1}", "0.15.12221", _settings.Commander);
+        }
+
+        private void GetSettings() {
+            _settings = SettingsServices.GetSettings();
         }
 
         private void BindStaticControls() {
@@ -80,9 +103,7 @@ namespace EliteExpeditionLog {
             _discovered = Discovered;
             _distToNext = DistToNextText;
         }
-        #endregion
 
-        #region Methods
         private  void PopulateSystemGrid() {
             if (_currentExpedition == null) return;
             var data = StarSystemServices.GetLastNSystems(_currentExpedition);
@@ -110,6 +131,7 @@ namespace EliteExpeditionLog {
             DistanceTravelled.Text = _currentStarSystem.DistToNext.ToString("###0.00");
             _systemObjects = new BindingList<SystemObject>(SystemObjectServices.GetByStarSystemId(_currentStarSystem.Id));
             RefreshScannedObjectsList();
+            GetDistanceTravelled();
         }
 
         private void RefreshExpeditionDropDown() {
@@ -247,7 +269,11 @@ namespace EliteExpeditionLog {
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
-
+            var settingsForm = new SettingsForm(_settings);
+            if (settingsForm.ShowDialog() == DialogResult.OK) {
+                _settings = SettingsServices.UpdateSettings(settingsForm.Settings);
+                RefreshSettings();
+            }
         }
         #endregion
 
@@ -364,8 +390,9 @@ namespace EliteExpeditionLog {
         }
         #endregion
 
+        #region VisitedSystemsGrid Events
         private void VisitedSystemsGrid_SelectionChanged(object sender, EventArgs e) {
-           
+
         }
 
         private void VisitedSystemsGrid_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e) {
@@ -374,5 +401,17 @@ namespace EliteExpeditionLog {
             _currentStarSystem = StarSystemServices.GetByStarSystemId(row.Id);
             RefreshStarSystemControls();
         }
+        #endregion
+
+        #region LoadSystemsWorker Events
+        private void LoadSystemsWorker_DoWork(object sender, DoWorkEventArgs e) {
+            Systems = new List<EELData.System>();
+            Systems = SystemServices.GetAllSystems();
+        }
+
+        private void LoadSystemsWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
+            LogRichText(string.Format("Completed loading {0} Systems...", Systems.Count()), Color.DarkRed);
+        } 
+        #endregion
     }
 }

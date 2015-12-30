@@ -12,6 +12,8 @@ namespace EELData {
         public DbSet<StarSystem> StarSystems { get; set; }
         public DbSet<SystemObject> SystemObjects { get; set; }
         public DbSet<ObjectType> ObjectTypes { get; set; }
+        public DbSet<Settings> Settings { get; set; }
+        public DbSet<System> Systems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBulder) {
             var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "eel.db" };

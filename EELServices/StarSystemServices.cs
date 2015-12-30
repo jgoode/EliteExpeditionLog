@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EELData;
 using System.Data.Entity;
 
@@ -43,6 +41,16 @@ namespace EELServices {
                 }
             }
             return visited;
+        }
+
+        public static double GetTotalDistance(Expedition expedition) {
+            double sum = 0;
+            using (var db = new EelContext()) {
+                sum = (from p in db.StarSystems.Include("Expeditions")
+                       where p.Expedition.Id == expedition.Id
+                       select p.DistToNext).Sum();
+            }
+            return sum;
         }
 
         public static StarSystem GetByStarSystemId(int id) {

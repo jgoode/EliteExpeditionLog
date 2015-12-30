@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EELData;
 
 namespace EELServices {
     public class SystemPosition
@@ -13,8 +14,8 @@ namespace EELServices {
         public string Name { get; set; }
         public int Nr { get; set; }
         public int BodyNr { get; set; }
-        public SystemClass CurSystem { get; set; }
-        public SystemClass PrevSystem { get; set; }
+        public EELData.System CurSystem { get; set; }
+        public EELData.System PrevSystem { get; set; }
         public string strDistance { get; set; }
         #endregion
 
