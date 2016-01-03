@@ -10,5 +10,6 @@ namespace EELData {
         public DateTime Date { get; set; }
         public string Name { get; set; }
         public double Distance { get; set; }
+        public bool HasSystemObjects { get; set; }
     }
 }

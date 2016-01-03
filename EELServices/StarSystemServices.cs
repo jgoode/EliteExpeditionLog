@@ -66,21 +66,29 @@ namespace EELServices {
 
         public static List<SystemGridRow> GetLastNSystems(Expedition currentExpedition, int numberToReturn = 20) {
             List<StarSystem> starSystems = null;
+            List<SystemGridRow> result = new List<SystemGridRow>();
             using (var db = new EelContext()) {
                 starSystems = (from p in db.StarSystems.Include("Expeditions")
                                where p.Expedition.Id == currentExpedition.Id
                                orderby p.CreatedAt descending
                                select p).Take(numberToReturn).ToList();
+
+                foreach(var system in starSystems) {
+                    int count = (from q in db.SystemObjects
+                                 where q.StarSystem.Id == system.Id
+                                 select q).Count();
+
+                    var row = new SystemGridRow();
+                    row.Date = system.CreatedAt;
+                    row.Distance = system.DistToNext;
+                    row.Name = system.Name;
+                    row.HasSystemObjects = count > 0;
+                    row.Id = system.Id;
+                    result.Add(row);
+                }
             }
 
-            return (from p in starSystems
-                    orderby p.CreatedAt descending
-                    select new SystemGridRow {
-                        Date = p.CreatedAt,
-                        Distance = p.DistToNext,
-                        Name = p.Name,
-                        Id = p.Id
-                    }).ToList();
+            return result;
         }
     }
 }

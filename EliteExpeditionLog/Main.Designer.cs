@@ -186,6 +186,7 @@
             this.VisitedSystemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.VisitedSystemsGrid.Size = new System.Drawing.Size(569, 145);
             this.VisitedSystemsGrid.TabIndex = 4;
+            this.VisitedSystemsGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.VisitedSystemsGrid_CellFormatting);
             this.VisitedSystemsGrid.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.VisitedSystemsGrid_RowStateChanged);
             this.VisitedSystemsGrid.SelectionChanged += new System.EventHandler(this.VisitedSystemsGrid_SelectionChanged);
             // 

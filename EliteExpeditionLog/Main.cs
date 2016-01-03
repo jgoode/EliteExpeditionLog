@@ -62,7 +62,7 @@ namespace EliteExpeditionLog {
                 LogWatcher.EnableRaisingEvents = true;
             }
             RefreshExpeditionDropDown();
-            PopulateSystemGrid();
+            //PopulateSystemGrid();
             PopulateObjectTypes();
             GetDistanceTravelled();
             _logFileHandler = new LogFileHandler(_currentExpedition);
@@ -108,7 +108,7 @@ namespace EliteExpeditionLog {
             if (_currentExpedition == null) return;
             var data = StarSystemServices.GetLastNSystems(_currentExpedition);
 
-            static_grid.DataSource = StarSystemServices.GetLastNSystems(_currentExpedition);
+            static_grid.DataSource = data;
             static_grid.Columns[1].Width = 150;
             static_grid.Columns[2].Width = 330;
             static_grid.Columns[3].Width = 68;
@@ -411,7 +411,16 @@ namespace EliteExpeditionLog {
 
         private void LoadSystemsWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             LogRichText(string.Format("Completed loading {0} Systems...", Systems.Count()), Color.DarkRed);
-        } 
+        }
         #endregion
+
+        private void VisitedSystemsGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+            var row = (SystemGridRow)VisitedSystemsGrid.Rows[e.RowIndex].DataBoundItem;
+            if (row.HasSystemObjects) {
+                e.CellStyle.ForeColor = Color.Blue;
+            } else {
+                e.CellStyle.ForeColor = Color.Black;
+            }
+        }
     }
 }
