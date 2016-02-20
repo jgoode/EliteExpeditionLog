@@ -260,6 +260,24 @@ namespace EliteExpeditionLog {
             ScannedObjectsList.ValueMember = "Id";
 
         } 
+
+        private void GetListOfSuggestedSystems() {
+            var suggestedSystemNames = new List<string>
+{
+                "Sol", "Sadr", "Maia", "Polaris", "EZ Orionis",
+                "Kappa-2 Coronae Austrinae", "Eta Carinae", "HR 969", "UX Sculptoris"
+            };
+            var row = (SystemGridRow)static_grid.Rows[0].DataBoundItem;
+            var system = StarSystemServices.GetByStarSystemId(row.Id);
+            var suggestedSystems = GetListOfSuggestedSystems(system.X, system.Y, system.Z, 16);
+
+        }
+
+        private IEnumerable<EELData.System> GetListOfSuggestedSystems(double x, double y, double z, int count) {
+            throw new NotImplementedException();
+        }
+
+
         #endregion
 
         /* ********************** Form Events **************************/
@@ -401,6 +419,16 @@ namespace EliteExpeditionLog {
             _currentStarSystem = StarSystemServices.GetByStarSystemId(row.Id);
             RefreshStarSystemControls();
         }
+
+        private void VisitedSystemsGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+            var row = (SystemGridRow)VisitedSystemsGrid.Rows[e.RowIndex].DataBoundItem;
+            if (row.HasSystemObjects) {
+                e.CellStyle.ForeColor = Color.Blue;
+            } else {
+                e.CellStyle.ForeColor = Color.Black;
+            }
+        }
+
         #endregion
 
         #region LoadSystemsWorker Events
@@ -414,13 +442,6 @@ namespace EliteExpeditionLog {
         }
         #endregion
 
-        private void VisitedSystemsGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
-            var row = (SystemGridRow)VisitedSystemsGrid.Rows[e.RowIndex].DataBoundItem;
-            if (row.HasSystemObjects) {
-                e.CellStyle.ForeColor = Color.Blue;
-            } else {
-                e.CellStyle.ForeColor = Color.Black;
-            }
-        }
+
     }
 }
